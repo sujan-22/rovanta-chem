@@ -1,23 +1,27 @@
+import { siteContent } from "@/content/site-content";
+
 export const siteConfig = {
-    name: "ROVANTA PVT. LTD.",
-    shortName: "Rovanta",
-    domain: "https://www.rovantachem.com",
-    email: "info@rovantachem.com",
-    salesEmail: "sales@rovantachem.com",
-    purchaseEmail: "purchase@rovantachem.com",
-    phone: "+91 8866636344",
-    address:
-        "Plot No. C - 35, Laxmi Eco Industrial Park, Block No. 481, Opp. Tulsi Hotel, National Highway, NH-8, Hathoda, Gujarat 394405",
-    description:
-        "Manufacturer of specialty chemicals, agrochemical intermediates, pharmaceutical intermediates, and copper compounds.",
+    name: siteContent.company.legalName,
+    shortName: siteContent.company.brandName,
+    domain: siteContent.company.domain,
+    email: siteContent.company.email,
+    salesEmail: siteContent.company.salesEmail,
+    purchaseEmail: siteContent.company.purchaseEmail,
+    phone: siteContent.company.phoneDisplay,
+    address: siteContent.company.address.full,
+    description: siteContent.company.description,
     keywords: [
         "Rovanta",
         "Rovanta Chem",
-        "chemical manufacturer India",
-        "specialty chemicals",
+        "Rovanta Pvt Ltd",
+        "copper oxychloride manufacturer India",
+        "copper oxide manufacturer Gujarat",
+        "copper sulphate manufacturer India",
+        "specialty chemicals Surat",
+        "specialty chemical manufacturer Gujarat",
         "agrochemical intermediates",
         "pharmaceutical intermediates",
         "copper compounds",
-        "chemical supplier Gujarat",
+        "custom chemical manufacturing",
     ],
 };
