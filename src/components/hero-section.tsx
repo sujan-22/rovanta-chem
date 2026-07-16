@@ -1,148 +1,106 @@
-import {
-    ArrowRight,
-    Atom,
-    Factory,
-    FlaskConical,
-    ShieldCheck,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import { AnimatedBackground } from "@/components/animated-bg";
-import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/site";
+import { siteContent } from "@/content/site-content";
+import { cn } from "@/lib/utils";
 
-const stats = [
-    { label: "Product Categories", value: "04" },
-    { label: "Manufacturing Focus", value: "B2B" },
-    { label: "Location", value: "Gujarat" },
-];
+const plateAccentClasses = [
+    "border-l-copper",
+    "border-l-verdigris",
+    "border-l-sulphate",
+] as const;
 
 export function HeroSection() {
+    const { hero } = siteContent.home;
+
+    const primaryAction = hero.actions[0];
+    const secondaryAction = hero.actions[1];
+
     return (
         <section
             id="home"
-            className="relative min-h-screen overflow-hidden px-6 pt-32"
+            className="hero-surface relative isolate overflow-hidden"
         >
-            <AnimatedBackground />
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-10 -right-10 select-none font-mono text-[clamp(7rem,18vw,16rem)] leading-none text-verdigris/15"
+            >
+                {hero.signatureFormula}
+            </div>
 
-            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr]">
-                <div>
-                    <Badge
-                        variant="secondary"
-                        className="mb-6 rounded-full px-4 py-2"
-                    >
-                        Specialty Chemicals • Intermediates • Copper Compounds
-                    </Badge>
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,135,59,0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(46,139,110,0.16),transparent_42%)]"
+            />
 
-                    <h1 className="text-balance font-heading text-5xl font-black leading-tight tracking-tight text-foreground md:text-7xl">
-                        Reliable chemical manufacturing for demanding
-                        industries.
-                    </h1>
-
-                    <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-                        {siteConfig.name} manufactures specialty chemicals,
-                        agrochemical intermediates, pharmaceutical
-                        intermediates, and copper compounds for domestic and
-                        international business requirements.
+            <div className="site-container relative z-10 py-20 md:py-28">
+                <Reveal>
+                    <p className="technical-label text-[#9fb0b7]">
+                        {hero.eyebrow}
                     </p>
 
-                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                    <p className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-[#dccfa9]">
+                        {hero.kicker}
+                    </p>
+
+                    <h1 className="text-balance mt-5 max-w-[19ch] font-heading text-4xl font-bold leading-[1.1] tracking-tight text-[#f2efe8] md:text-6xl lg:text-7xl">
+                        <span className="bg-linear-to-r from-[#e8cd84] via-[#b8934a] to-[#ddbe6e] bg-clip-text italic text-transparent">
+                            {hero.titlePrefix}
+                        </span>{" "}
+                        {hero.titleSuffix}
+                    </h1>
+
+                    <p className="mt-6 max-w-3xl text-base leading-8 text-[#c9d2d6] md:text-lg">
+                        {hero.description}
+                    </p>
+
+                    <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                         <Button
                             size="lg"
                             asChild
-                            className="rounded-full bg-primary px-7 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:bg-primary/90"
+                            className="bg-copper text-white hover:bg-copper-deep"
                         >
-                            <a href="#contact">
-                                Request a Quote
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </a>
+                            <Link href={primaryAction.href}>
+                                {primaryAction.label}
+                                <ArrowRight className="ml-2 size-4" />
+                            </Link>
                         </Button>
 
                         <Button
                             size="lg"
                             variant="outline"
                             asChild
-                            className="rounded-full border-white/15 bg-white/4 px-7 font-semibold text-white backdrop-blur transition hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
+                            className="border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10 hover:text-white"
                         >
-                            <a href="#products">View Products</a>
+                            <Link href={secondaryAction.href}>
+                                {secondaryAction.label}
+                            </Link>
                         </Button>
                     </div>
+                </Reveal>
 
-                    <div className="mt-12 grid max-w-xl grid-cols-1 gap-4 sm:grid-cols-3">
-                        {stats.map((stat) => (
+                <div className="mt-14 grid max-w-4xl gap-3 md:grid-cols-3">
+                    {hero.plates.map((plate, index) => (
+                        <Reveal key={plate.label} delay={index * 0.08}>
                             <div
-                                key={stat.label}
-                                className="rounded-2xl border border-primary/20 bg-linear-to-br from-primary/15 via-card/80 to-card/70 p-5 shadow-xl shadow-black/20 backdrop-blur-xl"
+                                className={cn(
+                                    "rounded-lg border-y border-r border-l-4 border-white/15 bg-white/4 px-5 py-4",
+                                    plateAccentClasses[index] ??
+                                        "border-l-copper",
+                                )}
                             >
-                                <p className="font-heading text-3xl font-black tracking-tight text-primary">
-                                    {stat.value}
+                                <p className="technical-label text-[#9fb0b7]">
+                                    {plate.label}
                                 </p>
-                                <p className="mt-2 text-sm font-medium text-zinc-300">
-                                    {stat.label}
+
+                                <p className="mt-2 font-heading text-xl font-bold text-white">
+                                    {plate.value}
                                 </p>
                             </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="relative">
-                    <div className="glass-card rounded-[2rem] p-6">
-                        <div className="mb-6 flex items-center justify-between">
-                            <p className="text-sm uppercase tracking-[0.35em] text-primary">
-                                Chemical Profile
-                            </p>
-                            <div className="h-3 w-3 rounded-full bg-primary shadow-[0_0_24px_color-mix(in_oklch,var(--primary)_70%,transparent)]" />
-                        </div>
-
-                        <div className="grid gap-4">
-                            {[
-                                {
-                                    icon: Atom,
-                                    formula: "CuSO₄",
-                                    label: "Copper compounds",
-                                },
-                                {
-                                    icon: FlaskConical,
-                                    formula: "API",
-                                    label: "Pharmaceutical intermediates",
-                                },
-                                {
-                                    icon: Factory,
-                                    formula: "R&D",
-                                    label: "Custom synthesis support",
-                                },
-                                {
-                                    icon: ShieldCheck,
-                                    formula: "QC",
-                                    label: "Quality-focused operations",
-                                },
-                            ].map((item) => {
-                                const Icon = item.icon;
-
-                                return (
-                                    <div
-                                        key={item.formula}
-                                        className="rounded-2xl border border-white/10 bg-background/70 p-5"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                                                <Icon className="h-5 w-5" />
-                                            </div>
-
-                                            <div>
-                                                <p className="font-mono text-3xl font-bold text-foreground">
-                                                    {item.formula}
-                                                </p>
-                                                <p className="mt-1 text-sm text-muted-foreground">
-                                                    {item.label}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                        </Reveal>
+                    ))}
                 </div>
             </div>
         </section>

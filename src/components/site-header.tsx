@@ -1,4 +1,9 @@
-import { Beaker, Menu } from "lucide-react";
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Mail, Menu, Phone } from "lucide-react";
+import { FaLinkedinIn } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,96 +14,130 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
-
-const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Products", href: "#products" },
-    { label: "Facility", href: "#facility" },
-    { label: "Quality", href: "#quality" },
-    { label: "Contact", href: "#contact" },
-];
+import { siteContent } from "@/content/site-content";
 
 export function SiteHeader() {
+    const { company, navigation } = siteContent;
+
     return (
-        <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-background/80 backdrop-blur-xl">
-            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24">
-                <a href="#home" className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/25 md:h-14 md:w-14">
-                        <Beaker className="h-6 w-6" />
-                    </div>
+        <header className="sticky top-0 z-50">
+            <div className="hidden bg-oxide py-2 text-xs text-[#eadfd6] lg:block">
+                <div className="site-container flex items-center justify-between gap-6">
+                    <p>{company.address.short}</p>
 
-                    <div>
-                        <p className="font-heading text-xl font-bold tracking-[0.22em] text-foreground md:text-2xl">
-                            ROVANTA
-                        </p>
-                        <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">
-                            PVT. LTD.
-                        </p>
-                    </div>
-                </a>
-
-                <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-                    {navItems.map((item) => (
+                    <div className="flex items-center gap-5">
                         <a
-                            key={item.href}
-                            href={item.href}
-                            className="transition hover:text-foreground"
+                            href={`mailto:${company.email}`}
+                            className="inline-flex items-center gap-1.5 transition hover:text-white"
                         >
-                            {item.label}
+                            <Mail className="size-3.5" />
+                            {company.email}
                         </a>
-                    ))}
-                </nav>
 
-                <div className="hidden md:block">
-                    <Button asChild className="rounded-full px-6 font-semibold">
-                        <a href="#contact">Request Quote</a>
-                    </Button>
-                </div>
-
-                <Sheet>
-                    <SheetTrigger asChild>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-12 w-12 rounded-full border-white/15 bg-white/4 text-white backdrop-blur hover:border-primary/50 hover:bg-primary/10 hover:text-primary md:hidden"
+                        <a
+                            href={`tel:${company.phoneHref}`}
+                            className="inline-flex items-center gap-1.5 transition hover:text-white"
                         >
-                            <Menu className="h-6 w-6 text-current" />
-                            <span className="sr-only">Open navigation</span>
-                        </Button>
-                    </SheetTrigger>
+                            <Phone className="size-3.5" />
+                            {company.phoneDisplay}
+                        </a>
 
-                    <SheetContent
-                        side="right"
-                        className="w-[82vw] border-l border-white/10 bg-background/95 px-7 py-8 backdrop-blur-xl sm:max-w-sm"
+                        <a
+                            href={company.linkedin}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 transition hover:text-white"
+                        >
+                            <FaLinkedinIn className="size-3.5" />
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div className="border-b border-line bg-card/95 backdrop-blur-xl">
+                <div className="site-container flex h-24 items-center justify-between gap-5">
+                    <Link
+                        href="/"
+                        aria-label={`${company.legalName} home`}
+                        className="flex shrink-0 items-center"
                     >
-                        <SheetHeader className="mb-10 text-left pl-0">
-                            <SheetTitle className="font-heading text-3xl text-foreground">
-                                Rovanta
-                            </SheetTitle>
-                        </SheetHeader>
+                        <Image
+                            src="/logo2.png"
+                            alt={`${company.legalName} logo`}
+                            width={1030}
+                            height={985}
+                            priority
+                            className="h-20 w-auto object-contain"
+                        />
+                    </Link>
 
-                        <nav className="flex flex-col gap-7">
-                            {navItems.map((item) => (
-                                <SheetClose key={item.href} asChild>
-                                    <a
-                                        href={item.href}
-                                        className="text-2xl font-medium tracking-tight text-muted-foreground transition hover:text-primary"
+                    <nav className="hidden items-center gap-0.5 2xl:flex">
+                        {navigation.map((item) => (
+                            <Button
+                                key={item.href}
+                                asChild
+                                variant={item.cta ? "default" : "ghost"}
+                                size="sm"
+                            >
+                                <Link href={item.href}>{item.label}</Link>
+                            </Button>
+                        ))}
+                    </nav>
+
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                className="text-ink 2xl:hidden"
+                            >
+                                <Menu className="size-5" />
+                                <span className="sr-only">Open navigation</span>
+                            </Button>
+                        </SheetTrigger>
+
+                        <SheetContent
+                            side="right"
+                            className="w-[88vw] border-line bg-card px-7 py-8 sm:max-w-sm"
+                        >
+                            <SheetHeader className="text-left">
+                                <SheetTitle>
+                                    <Link
+                                        href="/"
+                                        aria-label={`${company.legalName} home`}
+                                        className="inline-flex"
                                     >
-                                        {item.label}
-                                    </a>
-                                </SheetClose>
-                            ))}
-                        </nav>
+                                        <Image
+                                            src="/logo.png"
+                                            alt={`${company.legalName} logo`}
+                                            width={1030}
+                                            height={985}
+                                            className="h-24 w-auto object-contain"
+                                        />
+                                    </Link>
+                                </SheetTitle>
+                            </SheetHeader>
 
-                        <div className="mt-10">
-                            <SheetClose asChild>
-                                <Button asChild className="w-full rounded-full">
-                                    <a href="#contact">Request Quote</a>
-                                </Button>
-                            </SheetClose>
-                        </div>
-                    </SheetContent>
-                </Sheet>
+                            <nav className="mt-8 flex flex-col gap-1">
+                                {navigation.map((item) => (
+                                    <SheetClose key={item.href} asChild>
+                                        <Link
+                                            href={item.href}
+                                            className={
+                                                item.cta
+                                                    ? "mt-4 rounded-lg bg-copper px-4 py-3 text-center font-semibold text-white"
+                                                    : "rounded-lg px-4 py-3 text-lg font-medium text-ink transition hover:bg-paper-deep"
+                                            }
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    </SheetClose>
+                                ))}
+                            </nav>
+                        </SheetContent>
+                    </Sheet>
+                </div>
             </div>
         </header>
     );

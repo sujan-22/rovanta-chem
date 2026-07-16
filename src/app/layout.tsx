@@ -1,24 +1,35 @@
 import type { Metadata } from "next";
-import { Roboto_Slab, Space_Grotesk } from "next/font/google";
+import { Inter, Libre_Baskerville, Roboto_Mono } from "next/font/google";
+
 import "./globals.css";
 
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
     subsets: ["latin"],
-    variable: "--font-sans",
+    variable: "--font-body",
 });
 
-const robotoSlab = Roboto_Slab({
+const libreBaskerville = Libre_Baskerville({
     subsets: ["latin"],
-    variable: "--font-heading",
+    weight: ["400", "700"],
+    variable: "--font-display",
+});
+
+const robotoMono = Roboto_Mono({
+    subsets: ["latin"],
+    variable: "--font-code",
 });
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteConfig.domain),
     title: {
-        default: `${siteConfig.name} | Specialty Chemical Manufacturer`,
+        default:
+            "ROVANTA PVT. LTD. | Specialty Copper Compounds & Chemical Manufacturing",
         template: `%s | ${siteConfig.shortName}`,
     },
     description: siteConfig.description,
@@ -30,7 +41,7 @@ export const metadata: Metadata = {
         locale: "en_IN",
         url: siteConfig.domain,
         siteName: siteConfig.name,
-        title: `${siteConfig.name} | Specialty Chemical Manufacturer`,
+        title: "ROVANTA PVT. LTD. | Specialty Copper Compounds & Chemical Manufacturing",
         description: siteConfig.description,
     },
     alternates: {
@@ -51,14 +62,18 @@ export default function RootLayout({
         <html
             lang="en-IN"
             className={cn(
-                "dark scroll-smooth",
-                spaceGrotesk.variable,
-                robotoSlab.variable,
+                inter.variable,
+                libreBaskerville.variable,
+                robotoMono.variable,
             )}
-            suppressHydrationWarning
         >
-            <body className="min-h-screen overflow-x-hidden antialiased">
+            <body>
+                <SiteHeader />
+
                 {children}
+
+                <SiteFooter />
+                <WhatsAppFloat />
             </body>
         </html>
     );
