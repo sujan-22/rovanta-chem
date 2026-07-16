@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -71,7 +72,7 @@ export default function RootLayout({
                 <SiteHeader />
 
                 {children}
-
+                <Analytics />
                 <SiteFooter />
                 <WhatsAppFloat />
             </body>
