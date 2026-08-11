@@ -1,61 +1,45 @@
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
+import { ProductCard } from "@/components/product-card";
+import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-const products = [
-    {
-        title: "Agrochemical Intermediates",
-        description:
-            "Manufacturing support for crop protection and agrochemical applications.",
-    },
-    {
-        title: "Copper Compounds",
-        description:
-            "Copper Oxychloride, Copper Sulphate, Copper Oxide, and related copper-based products.",
-    },
-    {
-        title: "Pharmaceutical Intermediates",
-        description:
-            "High-purity intermediate manufacturing support for pharmaceutical and API customers.",
-    },
-    {
-        title: "Specialty Chemicals",
-        description:
-            "Customized specialty chemical solutions developed for specific customer requirements.",
-    },
-];
+import { Button } from "@/components/ui/button";
+import { siteContent } from "@/content/site-content";
 
 export function ProductsSection() {
-    return (
-        <section id="products" className="px-6 py-24">
-            <div className="mx-auto max-w-7xl">
-                <SectionHeading
-                    eyebrow="Product Portfolio"
-                    title="Chemical solutions for industrial and commercial applications."
-                    description="Explore Rovanta’s core manufacturing categories. Product specifications, grades, and technical details can be shared upon request."
-                />
+    const { products } = siteContent;
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    {products.map((product) => (
-                        <Card
-                            key={product.title}
-                            className="glass-card group transition duration-300 hover:-translate-y-1 hover:border-primary/50"
-                        >
-                            <CardHeader>
-                                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 text-primary">
-                                    <ArrowUpRight className="h-5 w-5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                                </div>
-                                <CardTitle className="font-heading text-xl">
-                                    {product.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="leading-7 text-muted-foreground">
-                                {product.description}
-                            </CardContent>
-                        </Card>
+    return (
+        <section
+            id="products"
+            className="section-alt scroll-mt-24 py-20 md:py-24"
+        >
+            <div className="site-container">
+                <Reveal>
+                    <SectionHeading
+                        eyebrow={products.hero.eyebrow}
+                        title={products.hero.title}
+                        description={products.hero.description}
+                    />
+                </Reveal>
+
+                <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    {products.items.slice(0, 4).map((product, index) => (
+                        <Reveal key={product.slug} delay={(index % 4) * 0.07}>
+                            <ProductCard product={product} />
+                        </Reveal>
                     ))}
                 </div>
+
+                <Reveal className="mt-10 flex justify-center">
+                    <Button asChild variant="outline">
+                        <Link href="/products">
+                            View All Product Lines
+                            <ArrowRight className="ml-2 size-4" />
+                        </Link>
+                    </Button>
+                </Reveal>
             </div>
         </section>
     );
