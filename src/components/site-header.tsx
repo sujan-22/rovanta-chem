@@ -63,12 +63,12 @@ export function SiteHeader() {
                         className="flex shrink-0 items-center"
                     >
                         <Image
-                            src="/logo2.png"
+                            src="/final-logo.png"
                             alt={`${company.legalName} logo`}
                             width={1030}
                             height={985}
                             priority
-                            className="h-20 w-auto object-contain"
+                            className="h-25 w-auto object-contain"
                         />
                     </Link>
 
@@ -109,7 +109,7 @@ export function SiteHeader() {
                                         className="inline-flex"
                                     >
                                         <Image
-                                            src="/logo.png"
+                                            src="/final-logo.png"
                                             alt={`${company.legalName} logo`}
                                             width={1030}
                                             height={985}

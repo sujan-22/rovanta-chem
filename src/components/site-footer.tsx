@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
-import { FlaskConical, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { FaLinkedinIn } from "react-icons/fa";
 
 import { siteContent } from "@/content/site-content";
-import { FaLinkedinIn } from "react-icons/fa";
 
 export function SiteFooter() {
     const { company, footer } = siteContent;
@@ -12,22 +13,21 @@ export function SiteFooter() {
             <div className="site-container py-14">
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.4fr]">
                     <div>
-                        <div className="flex items-center gap-3 text-white">
-                            <span className="grid size-11 place-items-center rounded-lg bg-white/10">
-                                <FlaskConical className="size-6" />
-                            </span>
+                        <Link
+                            href="/"
+                            aria-label={`${company.legalName} home`}
+                            className="inline-flex"
+                        >
+                            <Image
+                                src="/final-logo-light.png"
+                                alt={`${company.legalName} logo`}
+                                width={1030}
+                                height={1000}
+                                className="h-24 w-auto object-contain"
+                            />
+                        </Link>
 
-                            <div>
-                                <p className="font-heading text-lg font-bold">
-                                    {company.legalName}
-                                </p>
-                                <p className="text-xs uppercase tracking-[0.16em] text-[#a5968a]">
-                                    {company.tagline}
-                                </p>
-                            </div>
-                        </div>
-
-                        <p className="mt-5 max-w-sm text-sm leading-7">
+                        <p className="mt-4 max-w-sm text-sm leading-7">
                             {footer.summary}
                         </p>
 
@@ -35,7 +35,7 @@ export function SiteFooter() {
                             href={company.linkedin}
                             target="_blank"
                             rel="noreferrer"
-                            className="mt-5 inline-flex items-center gap-2 text-sm hover:text-white"
+                            className="mt-5 inline-flex items-center gap-2 text-sm transition hover:text-white"
                         >
                             <FaLinkedinIn className="size-4" />
                             Follow ROVANTA on LinkedIn
@@ -52,7 +52,7 @@ export function SiteFooter() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-sm hover:text-white hover:underline"
+                                    className="text-sm transition hover:text-white hover:underline"
                                 >
                                     {link.label}
                                 </Link>
@@ -70,7 +70,7 @@ export function SiteFooter() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-sm hover:text-white hover:underline"
+                                    className="text-sm transition hover:text-white hover:underline"
                                 >
                                     {link.label}
                                 </Link>
@@ -88,7 +88,7 @@ export function SiteFooter() {
 
                             <a
                                 href={`mailto:${company.email}`}
-                                className="flex items-start gap-2 hover:text-white"
+                                className="flex items-start gap-2 transition hover:text-white"
                             >
                                 <Mail className="mt-0.5 size-4 shrink-0" />
                                 {company.email}
@@ -96,7 +96,7 @@ export function SiteFooter() {
 
                             <a
                                 href={`tel:${company.phoneHref}`}
-                                className="flex items-start gap-2 hover:text-white"
+                                className="flex items-start gap-2 transition hover:text-white"
                             >
                                 <Phone className="mt-0.5 size-4 shrink-0" />
                                 {company.phoneDisplay}
@@ -116,7 +116,7 @@ export function SiteFooter() {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="hover:text-white"
+                                className="transition hover:text-white"
                             >
                                 {link.label}
                             </Link>
