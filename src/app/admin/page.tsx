@@ -1,7 +1,17 @@
-import { PageHero } from "@/components/page-hero";
-import { siteContent } from "@/content/site-content";
+import { notFound } from "next/navigation";
 
+import { PageHero } from "@/components/page-hero";
+import { siteContent, isRouteHidden } from "@/content/site-content";
+
+/*
+ * Not launched yet: see `hiddenRoutes` in site-content. The page below is kept
+ * intact and renders as soon as the route is removed from that list.
+ */
 export default function AdminPage() {
+    if (isRouteHidden("/admin")) {
+        notFound();
+    }
+
     const content = siteContent.adminDashboard;
 
     return (

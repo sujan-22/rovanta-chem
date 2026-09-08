@@ -28,10 +28,7 @@ export function ContactSection() {
     ];
 
     return (
-        <section
-            id="contact"
-            className="section-alt scroll-mt-24 py-20 md:py-24"
-        >
+        <section id="contact" className="scroll-mt-24 py-20 md:py-24">
             <div className="site-container">
                 <Reveal>
                     <SectionHeading

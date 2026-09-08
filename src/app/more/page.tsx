@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { PageHero } from "@/components/page-hero";
-import { siteContent } from "@/content/site-content";
+import { siteContent, visibleLinks } from "@/content/site-content";
 
 export default function MorePage() {
     return (
@@ -15,7 +15,14 @@ export default function MorePage() {
 
             <section className="py-20 md:py-24">
                 <div className="site-container grid gap-6 md:grid-cols-3">
-                    {siteContent.navigationGroups.map((group) => (
+                    {siteContent.navigationGroups.map((group) => {
+                        const links = visibleLinks(group.links);
+
+                        if (links.length === 0) {
+                            return null;
+                        }
+
+                        return (
                         <article
                             key={group.title}
                             className="surface-card p-6"
@@ -25,7 +32,7 @@ export default function MorePage() {
                             </h2>
 
                             <nav className="mt-5 grid gap-1">
-                                {group.links.map((link) => (
+                                {links.map((link) => (
                                     <Link
                                         key={link.href}
                                         href={link.href}
@@ -37,7 +44,8 @@ export default function MorePage() {
                                 ))}
                             </nav>
                         </article>
-                    ))}
+                        );
+                    })}
                 </div>
             </section>
         </main>

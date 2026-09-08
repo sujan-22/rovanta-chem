@@ -17,7 +17,6 @@ const icons = [Settings2, Zap, Recycle, ShieldCheck, Factory, Microscope];
 
 export function FacilitySection() {
     const { manufacturing } = siteContent;
-    const featuredProcess = manufacturing.processes[0];
 
     return (
         <section
@@ -57,34 +56,55 @@ export function FacilitySection() {
                 </div>
 
                 <Reveal className="mt-12">
-                    <div className="rounded-xl border border-copper/35 bg-copper/10 p-7 md:flex md:items-center md:justify-between md:gap-8">
-                        <div>
-                            <p className="technical-label text-copper">
-                                {featuredProcess.number} ·{" "}
-                                {featuredProcess.formula}
-                            </p>
+                    <div className="rounded-xl border border-copper/35 bg-copper/10 p-7 md:p-8">
+                        <div className="md:flex md:items-end md:justify-between md:gap-8">
+                            <div>
+                                <p className="technical-label text-copper">
+                                    Production lines
+                                </p>
 
-                            <h3 className="mt-3 font-heading text-2xl font-bold text-white">
-                                {featuredProcess.title}
-                            </h3>
+                                <h3 className="mt-3 max-w-2xl font-heading text-2xl font-bold text-white">
+                                    Two dedicated copper compound lines, one
+                                    quality system.
+                                </h3>
+                            </div>
 
-                            <p className="mt-3 max-w-3xl leading-7 text-[#cbbeb2]">
-                                {featuredProcess.description}
-                            </p>
-
-                            <p className="mt-4 overflow-x-auto rounded-lg bg-black/20 p-4 font-mono text-sm text-[#d8cda9]">
-                                {featuredProcess.equation}
-                            </p>
+                            <Button
+                                asChild
+                                className="mt-6 shrink-0 bg-copper text-white hover:bg-copper-deep md:mt-0"
+                            >
+                                <Link href="/manufacturing">
+                                    View Manufacturing
+                                </Link>
+                            </Button>
                         </div>
 
-                        <Button
-                            asChild
-                            className="mt-6 shrink-0 bg-copper text-white hover:bg-copper-deep md:mt-0"
-                        >
-                            <Link href="/manufacturing">
-                                View Manufacturing
-                            </Link>
-                        </Button>
+                        <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                            {manufacturing.productionLines.map((line) => (
+                                <div
+                                    key={line.number}
+                                    className="rounded-lg border border-white/15 bg-black/15 p-5"
+                                >
+                                    <p className="flex items-center gap-2 text-copper">
+                                        <span className="technical-label">
+                                            {line.number}
+                                        </span>
+                                        <span aria-hidden="true">·</span>
+                                        <span className="font-mono text-xs tracking-[0.05em]">
+                                            {line.formula}
+                                        </span>
+                                    </p>
+
+                                    <h4 className="mt-3 font-heading text-xl font-bold text-white">
+                                        {line.title}
+                                    </h4>
+
+                                    <p className="mt-2 font-mono text-sm text-[#cbbeb2]">
+                                        {line.capacity}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </Reveal>
             </div>
