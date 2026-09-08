@@ -110,13 +110,13 @@ export const siteContent = {
             navContact: "Contact",
             navQuote: "Request a Quote",
             heroEyebrow:
-                "Surat · Gujarat · India — Zero Liquid Discharge Facility",
+                "Surat · Gujarat · India · Zero Liquid Discharge Facility",
             heroKicker:
                 "Reliable chemical manufacturing for demanding industries",
             heroTitlePrefix: "Copper chemistry,",
             heroTitleSuffix: "engineered for agriculture and industry.",
             heroDescription:
-                "ROVANTA PVT. LTD. manufactures high-purity copper oxychloride, copper oxide and specialty inorganic compounds — converting secondary copper into standardized, quality-controlled chemical products for agrochemical, pharmaceutical, ceramic and coatings supply chains.",
+                "ROVANTA PVT. LTD. manufactures high-purity copper oxychloride, copper oxide and specialty inorganic compounds, converting secondary copper into standardized, quality-controlled chemical products for agrochemical, pharmaceutical, ceramic and coatings supply chains.",
             exploreProducts: "Explore Products",
             requestQuote: "Request a Quote",
         },
@@ -132,12 +132,12 @@ export const siteContent = {
             navContact: "संपर्क",
             navQuote: "कोटेशन प्राप्त करें",
             heroEyebrow:
-                "सूरत · गुजरात · भारत — ज़ीरो लिक्विड डिस्चार्ज सुविधा",
+                "सूरत · गुजरात · भारत · ज़ीरो लिक्विड डिस्चार्ज सुविधा",
             heroKicker: "मांग वाले उद्योगों के लिए विश्वसनीय रासायनिक निर्माण",
             heroTitlePrefix: "कृषि और उद्योग के लिए",
             heroTitleSuffix: "कॉपर रसायन।",
             heroDescription:
-                "रोवंता प्रा. लि. उच्च शुद्धता वाले कॉपर ऑक्सीक्लोराइड, कॉपर ऑक्साइड और विशेष अकार्बनिक यौगिकों का निर्माण करती है — एग्रोकेमिकल, फार्मास्युटिकल, सिरेमिक और कोटिंग उद्योगों के लिए।",
+                "रोवंता प्रा. लि. उच्च शुद्धता वाले कॉपर ऑक्सीक्लोराइड, कॉपर ऑक्साइड और विशेष अकार्बनिक यौगिकों का निर्माण करती है, एग्रोकेमिकल, फार्मास्युटिकल, सिरेमिक और कोटिंग उद्योगों के लिए।",
             exploreProducts: "उत्पाद देखें",
             requestQuote: "कोटेशन प्राप्त करें",
         },
@@ -152,16 +152,31 @@ export const siteContent = {
             navSustainability: "ટકાઉપણું",
             navContact: "સંપર્ક",
             navQuote: "ક્વોટ મેળવો",
-            heroEyebrow: "સુરત · ગુજરાત · ભારત — ઝીરો લિક્વિડ ડિસ્ચાર્જ સુવિધા",
+            heroEyebrow: "સુરત · ગુજરાત · ભારત · ઝીરો લિક્વિડ ડિસ્ચાર્જ સુવિધા",
             heroKicker: "માંગવાળા ઉદ્યોગો માટે વિશ્વસનીય રાસાયણિક ઉત્પાદન",
             heroTitlePrefix: "ખેતી અને ઉદ્યોગ માટે",
             heroTitleSuffix: "કોપર રસાયણશાસ્ત્ર.",
             heroDescription:
-                "રોવંતા પ્રા. લિ. ઉચ્ચ શુદ્ધતાવાળા કોપર ઓક્સિક્લોરાઇડ, કોપર ઓક્સાઇડ અને સ્પેશિયાલિટી અકાર્બનિક સંયોજનોનું ઉત્પાદન કરે છે — એગ્રોકેમિકલ, ફાર્માસ્યુટિકલ, સિરામિક અને કોટિંગ સપ્લાય ચેઇન માટે.",
+                "રોવંતા પ્રા. લિ. ઉચ્ચ શુદ્ધતાવાળા કોપર ઓક્સિક્લોરાઇડ, કોપર ઓક્સાઇડ અને સ્પેશિયાલિટી અકાર્બનિક સંયોજનોનું ઉત્પાદન કરે છે, એગ્રોકેમિકલ, ફાર્માસ્યુટિકલ, સિરામિક અને કોટિંગ સપ્લાય ચેઇન માટે.",
             exploreProducts: "પ્રોડક્ટ્સ જુઓ",
             requestQuote: "ક્વોટ મેળવો",
         },
     },
+
+    /*
+     * Header nav. Kept to six links plus the CTA so the full bar fits from the
+     * lg breakpoint up; the rest of the site is reachable from /more and the
+     * footer groups. `navigation` is the complete list used in the mobile sheet.
+     */
+    primaryNavigation: [
+        { label: "About", href: "/about" },
+        { label: "Products", href: "/products" },
+        { label: "Industries", href: "/industries" },
+        { label: "Manufacturing", href: "/manufacturing" },
+        { label: "Quality", href: "/quality" },
+        { label: "Contact", href: "/contact" },
+        { label: "Request a Quote", href: "/quote", cta: true },
+    ] satisfies readonly NavigationItem[],
 
     navigation: [
         { label: "Home", href: "/" },
@@ -224,13 +239,12 @@ export const siteContent = {
 
     home: {
         hero: {
-            eyebrow: "Surat · Gujarat · India — Zero Liquid Discharge Facility",
+            eyebrow: "Surat · Gujarat · India · Zero Liquid Discharge Facility",
             kicker: "Reliable chemical manufacturing for demanding industries",
             titlePrefix: "Copper chemistry,",
             titleSuffix: "engineered for agriculture and industry.",
             description:
-                "ROVANTA PVT. LTD. manufactures high-purity copper oxychloride, copper oxide and specialty inorganic compounds — converting secondary copper into standardized, quality-controlled chemical products for agrochemical, pharmaceutical, ceramic and coatings supply chains.",
-            signatureFormula: "Cu₂(OH)₃Cl",
+                "ROVANTA PVT. LTD. manufactures high-purity copper oxychloride, copper oxide and specialty inorganic compounds, converting secondary copper into standardized, quality-controlled chemical products for agrochemical, pharmaceutical, ceramic and coatings supply chains.",
             actions: [
                 { label: "Explore Products", href: "/products" },
                 { label: "Request a Quote", href: "/quote" },
@@ -263,7 +277,7 @@ export const siteContent = {
                 },
                 {
                     value: "100%",
-                    label: "Zero Liquid Discharge — closed-loop water management",
+                    label: "Zero Liquid Discharge, closed-loop water management",
                     accent: "verdigris",
                 },
                 {
@@ -297,13 +311,13 @@ export const siteContent = {
                 "Formulators and industrial buyers depend on lot-to-lot uniformity. Our process design, in-process controls and QC lab exist for exactly that.",
             benefits: [
                 "Purity and particle-size uniformity engineered to international standards",
-                "Closed-loop mother-liquor recycling for batch consistency and low waste",
+                "Closed-loop water management for batch consistency and minimal waste",
                 "COA with every dispatch; TDS and SDS documentation per product",
-                "NH-8 corridor logistics — direct road, rail (Kim Jn. ~8.5 km) and port (Hazira ~45 km) access",
+                "NH-8 corridor logistics: direct road, rail (Kim Jn. ~8.5 km) and port (Hazira ~45 km) access",
                 "Customized manufacturing and technical support for customer-specific requirements",
             ],
             manufacturingCapabilities:
-                "Glass-lined batch digestion vessels · air-sparging oxidation · SS-316L basket centrifuges · electrical fluid-bed drying · indirect rotary calcination · dual-stage alkaline scrubbing · single-effect forced-circulation evaporator (ZLD).",
+                "Glass-lined batch reactors · SS-316L basket centrifuges · electrical fluid-bed drying · indirect rotary calcination · dual-stage alkaline scrubbing · forced-circulation evaporator (ZLD).",
             qualityCommitment:
                 "Quality-driven manufacturing, GMP-aligned production controls, and a 100% Zero Liquid Discharge water policy with clean electric process heating.",
         },
@@ -317,9 +331,9 @@ export const siteContent = {
                 "A specialty chemical manufacturer committed to quality, consistency and environmentally responsible operations.",
         },
         paragraphs: [
-            "ROVANTA PVT. LTD. is a newly incorporated specialty chemical venture at the beginning of its journey — its greenfield plant at Laxmi Eco Industrial Park, Surat is currently being established. The company is dedicated to delivering high-quality, reliable and innovative chemical solutions to industries across domestic and international markets, specializing in Specialty Chemicals, Agrochemical Intermediates, Pharmaceutical Intermediates and Copper Compounds, serving a diverse range of industrial applications.",
+            "ROVANTA PVT. LTD. is a newly incorporated specialty chemical venture at the beginning of its journey. Its greenfield plant at Laxmi Eco Industrial Park, Surat is currently being established. The company is dedicated to delivering high-quality, reliable and innovative chemical solutions to industries across domestic and international markets, specializing in Specialty Chemicals, Agrochemical Intermediates, Pharmaceutical Intermediates and Copper Compounds, serving a diverse range of industrial applications.",
             "Supported by a modern manufacturing facility, advanced processing equipment and a well-equipped quality control laboratory, ROVANTA ensures that every product meets stringent quality standards and customer specifications. The company follows a quality-driven manufacturing approach with continuous focus on process optimization, R&D, technical innovation and environmentally responsible operations.",
-            "Driven by innovation, integrity and excellence, ROVANTA aims to become one of India's most trusted and globally recognized manufacturers of specialty chemicals — building long-term partnerships while contributing to the sustainable growth of the chemical industry.",
+            "Driven by innovation, integrity and excellence, ROVANTA aims to become one of India's most trusted and globally recognized manufacturers of specialty chemicals, building long-term partnerships while contributing to the sustainable growth of the chemical industry.",
         ],
         businessAreas: [
             "Specialty Chemicals",
@@ -341,11 +355,11 @@ export const siteContent = {
         people: [
             {
                 name: "Mr. Chintan Rokad",
-                role: "Founder & Director — Operations, Innovation & Finance",
+                role: "Founder & Director · Operations, Innovation & Finance",
                 linkedin:
                     "https://www.linkedin.com/in/chintan-rokad-40864a2a5/",
                 description:
-                    "Founder of ROVANTA PVT. LTD., responsible for manufacturing operations, production planning, process innovation, financial oversight and operational excellence — combining technical expertise with strategic business acumen to ensure efficient plant operations and consistent product quality.",
+                    "Founder of ROVANTA PVT. LTD., responsible for manufacturing operations, production planning, process innovation, financial oversight and operational excellence, combining technical expertise with strategic business acumen to ensure efficient plant operations and consistent product quality.",
                 responsibilities: [
                     "Manufacturing and plant operations, capacity utilization and maintenance",
                     "Process improvement, new product development and cost optimization",
@@ -355,7 +369,7 @@ export const siteContent = {
             },
             {
                 name: "Mr. Biraj Rokad",
-                role: "Director — Marketing & Business Development",
+                role: "Director · Marketing & Business Development",
                 linkedin: null,
                 description:
                     "Co-leads the new venture’s strategic marketing, business development and market expansion. With a forward-thinking mindset and strong understanding of the specialty chemicals industry, he focuses on long-term client relationships, emerging market opportunities and customer-centric solutions.",
@@ -385,10 +399,10 @@ export const siteContent = {
                 category: "Copper Compound",
                 accent: "verdigris",
                 shortDescription:
-                    "Broad-spectrum agricultural fungicide active ingredient — fine green technical-grade powder.",
+                    "Broad-spectrum agricultural fungicide active ingredient. Fine green technical-grade powder.",
                 capacity: "100 MT/annum installed capacity",
                 overview:
-                    "Copper Oxychloride is manufactured at our Surat facility by an atmospheric air-sparging liquid oxidation process: high-purity secondary copper is dissolved in hydrochloric acid under a continuous compressed-air stream, precipitating basic copper oxychloride as fine green crystals. The product is centrifugally separated, fluid-bed dried, pulverized to a uniform technical grade and packed in moisture-proof bags. Mother liquor is recycled to the reactor, supporting our closed-loop, Zero Liquid Discharge operation.",
+                    "Copper Oxychloride is manufactured at our Surat facility from high-purity secondary copper and finished as fine green crystals. The product is separated, dried, pulverized to a uniform technical grade and packed in moisture-proof bags. Production runs on a closed-loop, Zero Liquid Discharge system, and every lot is verified in our in-house QC laboratory before dispatch.",
                 applications: [
                     "Broad-spectrum contact fungicide for cash crops, orchards and vegetable belts",
                     "Control of fungal infestations and bacterial blights",
@@ -436,7 +450,7 @@ export const siteContent = {
                     "Dense black cupric oxide for catalysts, ceramic colouring and marine anti-fouling coatings.",
                 capacity: "80 MT/annum installed capacity",
                 overview:
-                    "Copper Oxide is produced by aqueous alkaline precipitation followed by thermal calcination: a digested copper salt solution is treated with metered sodium hydroxide to precipitate copper hydroxide, which is centrifugally isolated and calcined in an indirectly heated rotary kiln to yield dense, uniform cupric oxide particles. The product is milled to target particle-size profiles and packed in secure industrial bags.",
+                    "Copper Oxide is produced as a dense, uniform cupric oxide on an indirectly heated calcination line. The product is milled to target particle-size profiles, checked for purity and particle size in our QC laboratory, and packed in secure industrial bags.",
                 applications: [
                     "Catalyst in organic synthesis",
                     "Colouring agent for Gujarat’s ceramic tile clusters",
@@ -492,7 +506,7 @@ export const siteContent = {
                     "Algaecide in water treatment",
                 ],
                 packaging:
-                    "25/50 kg HDPE bags (indicative — pending client verification).",
+                    "25/50 kg HDPE bags (indicative, pending client verification).",
                 storage:
                     "Store in a cool, dry area away from metals and alkalis. Refer to SDS.",
                 specifications: [
@@ -535,7 +549,7 @@ export const siteContent = {
                     "Process intermediates",
                 ],
                 packaging: "As per customer specification.",
-                storage: "Product-specific — refer to the individual SDS.",
+                storage: "Product-specific. Refer to the individual SDS.",
                 specifications: [
                     {
                         label: "Portfolio",
@@ -562,14 +576,14 @@ export const siteContent = {
                     "Copper-based and inorganic intermediates for fungicide and crop-protection formulators.",
                 capacity: "Batch specialty processing",
                 overview:
-                    "ROVANTA supplies inorganic intermediates to agrochemical formulators — anchored by copper oxychloride technical — with consistent purity and particle-size uniformity engineered to match formulation requirements for WP, SC and granular crop-protection products.",
+                    "ROVANTA supplies inorganic intermediates to agrochemical formulators, anchored by copper oxychloride technical, with consistent purity and particle-size uniformity engineered to match formulation requirements for WP, SC and granular crop-protection products.",
                 applications: [
                     "Fungicide formulation (WP/SC/WG)",
                     "Integrated pest management programs",
                     "Crop-protection contract formulation supply",
                 ],
                 packaging: "25 kg HDPE bags or as agreed.",
-                storage: "Product-specific — refer to the individual SDS.",
+                storage: "Product-specific. Refer to the individual SDS.",
                 specifications: [
                     {
                         label: "Anchor product",
@@ -603,7 +617,7 @@ export const siteContent = {
                     "Laboratory and process chemistry",
                 ],
                 packaging: "As per customer and pharmacopeial requirement.",
-                storage: "Product-specific — refer to the individual SDS.",
+                storage: "Product-specific. Refer to the individual SDS.",
                 specifications: [
                     {
                         label: "Grades",
@@ -629,18 +643,18 @@ export const siteContent = {
                 category: "Copper Portfolio",
                 accent: "copper",
                 shortDescription:
-                    "The full ROVANTA copper chemistry range — oxychloride, oxide, sulphate and derivatives.",
+                    "The full ROVANTA copper chemistry range: oxychloride, oxide, sulphate and derivatives.",
                 capacity: "180 MT/annum aggregate (oxychloride + oxide)",
                 overview:
-                    "Copper chemistry is the core of ROVANTA. Our plant converts secondary copper scrap and wire into standardized, high-purity copper salts through acid digestion, atmospheric oxidation, alkaline precipitation and calcination — a value-add route that also supports import substitution for technical-grade copper chemicals in India.",
+                    "Copper chemistry is the core of ROVANTA. Our plant converts secondary copper scrap and wire into standardized, high-purity copper salts, a value-add model that also supports import substitution for technical-grade copper chemicals in India.",
                 applications: [
-                    "Agriculture — fungicides and micronutrients",
+                    "Agriculture: fungicides and micronutrients",
                     "Ceramics and pigments",
                     "Marine coatings",
                     "Catalysts and industrial chemistry",
                 ],
                 packaging: "Product-specific.",
-                storage: "Product-specific — refer to the individual SDS.",
+                storage: "Product-specific. Refer to the individual SDS.",
                 specifications: [
                     {
                         label: "Copper Oxychloride",
@@ -669,9 +683,9 @@ export const siteContent = {
                 accent: "ink",
                 shortDescription:
                     "Contract and toll manufacturing of inorganic specialty chemicals on flexible batch assets.",
-                capacity: "Glass-lined batch reactors, 300 L assemblies",
+                capacity: "Glass-lined batch reactors, flexible batch sizes",
                 overview:
-                    "ROVANTA offers custom and contract manufacturing of inorganic specialty chemicals. Our flexible batch infrastructure — glass-lined digestion vessels, SS-316L basket centrifuges, fluid-bed drying and rotary calcination — supports process development, scale-up and repeat commercial supply under confidentiality agreements.",
+                    "ROVANTA offers custom and contract manufacturing of inorganic specialty chemicals. Our flexible batch infrastructure, including glass-lined reactors, SS-316L basket centrifuges, fluid-bed drying and rotary calcination, supports process development, scale-up and repeat commercial supply under confidentiality agreements.",
                 applications: [
                     "Toll / contract manufacturing",
                     "Process development and scale-up",
@@ -682,7 +696,7 @@ export const siteContent = {
                 specifications: [
                     {
                         label: "Reactors",
-                        value: "Glass-lined batch digestion vessels with stirrers and jackets",
+                        value: "Glass-lined batch reactors with stirrers and jackets",
                     },
                     {
                         label: "Separation",
@@ -706,7 +720,7 @@ export const siteContent = {
             eyebrow: "Markets",
             title: "Industries served",
             description:
-                "From crop protection to marine coatings — standardized copper chemistry across supply chains in India and export markets.",
+                "From crop protection to marine coatings: standardized copper chemistry across supply chains in India and export markets.",
         },
         items: [
             {
@@ -744,7 +758,7 @@ export const siteContent = {
             eyebrow: "Export readiness",
             title: "Built for import substitution and export growth.",
             description:
-                "India imports significant volumes of technical-grade specialty chemical salts. By converting local secondary copper into standardized formulations, ROVANTA supports import substitution — while processes engineered to international purity and particle-size standards position the company for export markets across South-East Asia, the Middle East and East African agricultural zones. Proximity to Hazira Port (~45 km) keeps export logistics competitive.",
+                "India imports significant volumes of technical-grade specialty chemical salts. By converting local secondary copper into standardized formulations, ROVANTA supports import substitution, while processes engineered to international purity and particle-size standards position the company for export markets across South-East Asia, the Middle East and East African agricultural zones. Proximity to Hazira Port (~45 km) keeps export logistics competitive.",
         },
     },
 
@@ -753,36 +767,36 @@ export const siteContent = {
             eyebrow: "Operations",
             title: "Manufacturing",
             description:
-                "A compact, high-efficiency greenfield plant: acid digestion, atmospheric oxidation, alkaline precipitation and calcination in a closed-loop configuration.",
+                "A compact, high-efficiency greenfield plant engineered around controlled batch production, in-process quality control and a closed-loop, Zero Liquid Discharge water system.",
         },
-        processes: [
+        productionLines: [
             {
-                number: "Process 01",
+                number: "Line 01",
                 formula: "Cu₂(OH)₃Cl",
-                title: "Copper Oxychloride — air-sparging liquid oxidation",
+                title: "Copper Oxychloride",
+                capacity: "100 MT/annum",
                 description:
-                    "Secondary copper wire is loaded into 300 L glass-lined assemblies and charged with hydrochloric acid plus recycled mother liquor. Continuous compressed-air sparging maintains 65–75 °C oxidation; saturated liquor precipitates fine green oxychloride crystals, which are centrifuged, fluid-bed dried, pulverized and packed. Mother liquor returns to the reactor for the next batch.",
-                equation: "4Cu + 2HCl + 3O₂ + 2H₂O → 2Cu₂(OH)₃Cl ↓",
+                    "A dedicated glass-lined batch line finishing to fine green technical-grade powder. Every batch is separated, dried and milled to a controlled particle-size profile, then packed in moisture-proof bags. In-process checks run at each stage and every lot ships with a certificate of analysis.",
             },
             {
-                number: "Process 02",
+                number: "Line 02",
                 formula: "CuO",
-                title: "Copper Oxide — alkaline precipitation and calcination",
+                title: "Copper Oxide",
+                capacity: "80 MT/annum",
                 description:
-                    "Copper is digested in an acid intermediate bath; metered caustic dosing precipitates copper hydroxide, which is centrifugally isolated. The cake is calcined in an indirectly heated rotary kiln, dissociating to dense cupric oxide — then milled to target particle-size profiles and packed.",
-                equation: "Cu²⁺ + 2NaOH → Cu(OH)₂ ↓ →(Δ) CuO + H₂O ↑",
+                    "An indirectly heated calcination line producing dense, uniform cupric oxide. The product is milled to target particle-size profiles, verified for purity and particle size in the in-house QC laboratory, and packed in secure industrial bags.",
             },
         ],
         infrastructure: [
             {
                 title: "Reactor & separation train",
                 description:
-                    "Glass-lined batch digestion vessels with stirrers and cooling jackets; AOD pumps; SS-316L bottom-discharge basket centrifuges; nutsche filtration.",
+                    "Glass-lined batch reactors with stirrers and cooling jackets; AOD pumps; SS-316L bottom-discharge basket centrifuges; nutsche filtration.",
             },
             {
                 title: "Clean electric heating",
                 description:
-                    "Drying and calcination run on electrical resistance and indirect induction heating — no fuel-oil boilers, dramatically lowering stack emissions.",
+                    "Drying and calcination run on electrical resistance and indirect induction heating, with no fuel-oil boilers, dramatically lowering stack emissions.",
             },
             {
                 title: "Emission control",
@@ -797,7 +811,7 @@ export const siteContent = {
             {
                 title: "Power reliability",
                 description:
-                    "60 KVA grid connection (DGVCL) with a 45 KVA silent DG set on automatic transfer — keeping cooling pumps and scrubbers live through outages.",
+                    "60 KVA grid connection (DGVCL) with a 45 KVA silent DG set on automatic transfer, keeping cooling pumps and scrubbers live through outages.",
             },
             {
                 title: "Safety systems",
@@ -808,7 +822,7 @@ export const siteContent = {
         logistics: [
             {
                 label: "Road",
-                value: "Adjacent to National Highway 8 — direct Western Industrial Corridor transit without central Surat traffic",
+                value: "Adjacent to National Highway 8, giving direct Western Industrial Corridor transit without central Surat traffic",
             },
             {
                 label: "Rail",
@@ -816,7 +830,7 @@ export const siteContent = {
             },
             {
                 label: "Sea",
-                value: "Hazira Port Hub ~45 km — container and bulk handling for exports",
+                value: "Hazira Port Hub ~45 km, container and bulk handling for exports",
             },
             {
                 label: "Air",
@@ -834,7 +848,7 @@ export const siteContent = {
         },
         checkpoints: [
             "Well-equipped in-house quality control laboratory with analytical testing instruments",
-            "In-process controls across digestion, precipitation, drying and milling stages",
+            "In-process controls at every production stage, from charge through to packing",
             "Certificate of Analysis issued with every dispatch",
             "Technical Data Sheets and Safety Data Sheets maintained per product",
             "Good Manufacturing Practices-aligned production controls",
@@ -872,12 +886,12 @@ export const siteContent = {
             {
                 title: "Process development",
                 description:
-                    "Optimization of digestion, oxidation and precipitation parameters for yield, purity and energy efficiency — including closed-loop mother-liquor chemistry.",
+                    "Continuous optimization of production parameters for yield, purity and energy efficiency, backed by in-house analytical capability.",
             },
             {
                 title: "New product development",
                 description:
-                    "Extension of the copper compound range and customer-specific specialty formulations, developed from lab bench to 300 L batch scale.",
+                    "Extension of the copper compound range and customer-specific specialty formulations, developed from lab bench through to commercial batch scale.",
             },
             {
                 title: "Application support",
@@ -897,7 +911,7 @@ export const siteContent = {
         metrics: [
             {
                 value: "0",
-                label: "Litres of industrial wastewater discharged — 100% ZLD",
+                label: "Litres of industrial wastewater discharged · 100% ZLD",
                 accent: "verdigris",
             },
             {
@@ -920,7 +934,7 @@ export const siteContent = {
             {
                 title: "Closed-loop water",
                 description:
-                    "Mother liquor returns to the reactors; wash and rinse streams are neutralized, coagulated and separated in a forced-circulation evaporator. Condensed water is reused in cooling systems; salts are isolated for authorized hazardous-waste disposal.",
+                    "Process water is recovered and returned to production. Wash and rinse streams are neutralized, coagulated and separated in a forced-circulation evaporator; condensed water is reused in cooling systems and salts are isolated for authorized hazardous-waste disposal.",
             },
             {
                 title: "Clean energy profile",
@@ -930,7 +944,7 @@ export const siteContent = {
             {
                 title: "Circular feedstock",
                 description:
-                    "The plant's core route converts secondary copper scrap and wire into high-value chemical products — a recycling-based, import-substituting model.",
+                    "The plant converts secondary copper scrap and wire into high-value chemical products, a recycling-based, import-substituting model.",
             },
             {
                 title: "Responsible waste handling",
@@ -945,7 +959,7 @@ export const siteContent = {
             {
                 title: "Community & employment",
                 description:
-                    "12–15 direct technical jobs and 25–30 indirect roles across logistics and services in the Mangrol taluka — with zero displacement or R&R impact.",
+                    "12–15 direct technical jobs and 25–30 indirect roles across logistics and services in the Mangrol taluka, with zero displacement or R&R impact.",
             },
         ],
     },
@@ -955,7 +969,7 @@ export const siteContent = {
             eyebrow: "Resources",
             title: "Documents & Downloads",
             description:
-                "Product documentation, company profile and regulatory information — secure downloads are gated through the customer portal.",
+                "Product documentation, company profile and regulatory information. Secure downloads are gated through the customer portal.",
         },
         publicDocuments: [
             {
@@ -973,15 +987,15 @@ export const siteContent = {
         ],
         gatedDocuments: [
             {
-                title: "TDS — all products",
+                title: "TDS for all products",
                 status: "Customer portal",
             },
             {
-                title: "SDS — all products",
+                title: "SDS for all products",
                 status: "Customer portal",
             },
             {
-                title: "COA archive — per lot",
+                title: "COA archive, per lot",
                 status: "Customer portal",
             },
         ],
@@ -1006,14 +1020,14 @@ export const siteContent = {
                 category: "Sustainability",
                 title: "Inside a Zero Liquid Discharge chemical plant",
                 description:
-                    "How closed-loop mother liquor reuse, neutralization and forced-circulation evaporation eliminate wastewater discharge at small scale.",
+                    "How closed-loop water reuse, neutralization and forced-circulation evaporation eliminate wastewater discharge at small scale.",
                 status: "Pending client review",
             },
             {
                 category: "Markets",
                 title: "Copper compounds and India's import substitution opportunity",
                 description:
-                    "Converting secondary copper into technical-grade salts — the economics and the export corridors through Hazira.",
+                    "Converting secondary copper into technical-grade salts: the economics and the export corridors through Hazira.",
                 status: "Pending client review",
             },
         ],
@@ -1028,7 +1042,7 @@ export const siteContent = {
         },
         openings: [
             {
-                title: "Process Operator — Chemical Plant",
+                title: "Process Operator, Chemical Plant",
                 department: "Operations",
                 location: "Hathoda, Surat",
             },
@@ -1081,7 +1095,7 @@ export const siteContent = {
             eyebrow: "Commercial",
             title: "Request a Quote",
             description:
-                "Tell us the product, grade, quantity and destination — our team responds with pricing, documentation and lead times.",
+                "Tell us the product, grade, quantity and destination. Our team responds with pricing, documentation and lead times.",
         },
         requestTypes: ["Quotation", "Sample", "Quotation + Sample"],
         workflow: [
@@ -1198,7 +1212,42 @@ export const siteContent = {
     },
 } as const;
 
-export const allPublicRoutes = [
+/*
+ * Routes for features that are not built yet. Each either needs authentication,
+ * a database and protected APIs before it can do anything real, or has no page
+ * behind it at all. The page files stay in the repo so the work is not lost:
+ * `isRouteHidden` makes each route 404, and the helpers below drop it from the
+ * header, footer, /more index and sitemap.
+ *
+ * To ship one of these, delete its entry here (and, for /privacy and /terms,
+ * build the page first).
+ */
+export const hiddenRoutes = [
+    // Needs auth, a database, protected APIs and signed document downloads.
+    "/customer-portal",
+    // Needs auth, role-based authorization and persistent data.
+    "/admin",
+    // Every document is still "pending upload" and the rest sits behind the portal.
+    "/downloads",
+    // Posts are unwritten drafts; real posts need the blog CMS.
+    "/blog",
+    // Linked in the footer since launch, but no page was ever built for either.
+    "/privacy",
+    "/terms",
+] as const;
+
+export function isRouteHidden(href: string): boolean {
+    return (hiddenRoutes as readonly string[]).includes(href);
+}
+
+/** Drops links pointing at not-yet-built routes. */
+export function visibleLinks<T extends { href: string }>(
+    links: readonly T[],
+): T[] {
+    return links.filter((link) => !isRouteHidden(link.href));
+}
+
+const allRoutes = [
     "/",
     "/about",
     "/leadership",
@@ -1221,6 +1270,11 @@ export const allPublicRoutes = [
     "/privacy",
     "/terms",
 ] as const;
+
+/** Routes advertised in sitemap.xml. Hidden routes are excluded. */
+export const allPublicRoutes: string[] = allRoutes.filter(
+    (route) => !isRouteHidden(route),
+);
 
 export interface StaticPageSection {
     title: string;
@@ -1337,7 +1391,7 @@ export const staticPageContent = {
             {
                 title: "Process development",
                 description:
-                    "Evaluation and optimization of reaction, precipitation, drying, milling, and material-recovery parameters.",
+                    "Evaluation and optimization of production, drying, milling and material-recovery parameters.",
             },
             {
                 title: "New product development",

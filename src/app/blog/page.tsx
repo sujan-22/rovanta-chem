@@ -1,5 +1,7 @@
+import { notFound } from "next/navigation";
+
 import { PageHero } from "@/components/page-hero";
-import { siteContent } from "@/content/site-content";
+import { siteContent, isRouteHidden } from "@/content/site-content";
 import { createPageMetadata } from "@/lib/metadata";
 
 const { blog } = siteContent;
@@ -10,7 +12,15 @@ export const metadata = createPageMetadata(
     "/blog"
 );
 
+/*
+ * Not launched yet: see `hiddenRoutes` in site-content. The page below is kept
+ * intact and renders as soon as the route is removed from that list.
+ */
 export default function BlogPage() {
+    if (isRouteHidden("/blog")) {
+        notFound();
+    }
+
     return (
         <main>
             <PageHero {...blog.hero} />

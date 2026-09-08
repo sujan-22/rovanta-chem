@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { FileLock2, FileText } from "lucide-react";
 
+import { notFound } from "next/navigation";
+
 import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
-import { siteContent } from "@/content/site-content";
+import { siteContent, isRouteHidden } from "@/content/site-content";
 import { createPageMetadata } from "@/lib/metadata";
 
 const { downloads } = siteContent;
@@ -54,7 +56,15 @@ function DocumentList({
     );
 }
 
+/*
+ * Not launched yet: see `hiddenRoutes` in site-content. The page below is kept
+ * intact and renders as soon as the route is removed from that list.
+ */
 export default function DownloadsPage() {
+    if (isRouteHidden("/downloads")) {
+        notFound();
+    }
+
     return (
         <main>
             <PageHero {...downloads.hero} />

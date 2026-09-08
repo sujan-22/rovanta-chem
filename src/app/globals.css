@@ -151,7 +151,9 @@
 
     body {
         @apply bg-background text-foreground antialiased;
+        /* `dvh` tracks the viewport Safari actually shows; `vh` is the fallback. */
         min-height: 100vh;
+        min-height: 100dvh;
     }
 
     h1,
@@ -197,6 +199,19 @@
         color: var(--brand-paper);
     }
 
+    /*
+     * Fine engineering grid used behind dark hero surfaces. Masked to fade out
+     * at the edges so it never terminates on a hard line.
+     */
+    .engineering-grid {
+        background-image:
+            linear-gradient(to right, #f2efe8 1px, transparent 1px),
+            linear-gradient(to bottom, #f2efe8 1px, transparent 1px);
+        background-size: 64px 64px;
+        opacity: 0.07;
+        mask-image: radial-gradient(ellipse at center, black, transparent 78%);
+    }
+
     .section-alt {
         background: var(--brand-paper-deep);
     }
@@ -204,6 +219,20 @@
     .section-dark {
         background: var(--brand-oxide);
         color: #efe7de;
+    }
+
+    /*
+     * iOS Safari sizes the containing block for fixed elements to the *large*
+     * viewport (the one with the browser chrome hidden), so a `height: 100%`
+     * side sheet runs underneath the URL bar and the bottom tab bar. `dvh`
+     * tracks the viewport that is actually visible, so the sheet always ends
+     * where the browser chrome begins.
+     */
+    .sheet-viewport {
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100vh;
+        max-height: 100dvh;
     }
 
     .surface-card {

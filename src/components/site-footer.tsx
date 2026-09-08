@@ -3,10 +3,14 @@ import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa";
 
-import { siteContent } from "@/content/site-content";
+import { siteContent, visibleLinks } from "@/content/site-content";
 
 export function SiteFooter() {
     const { company, footer } = siteContent;
+
+    const productLinks = visibleLinks(footer.productLinks);
+    const companyLinks = visibleLinks(footer.companyLinks);
+    const legalLinks = visibleLinks(footer.legalLinks);
 
     return (
         <footer className="bg-oxide text-[#d8ccc1]">
@@ -48,7 +52,7 @@ export function SiteFooter() {
                         </h3>
 
                         <div className="mt-4 grid gap-2">
-                            {footer.productLinks.map((link) => (
+                            {productLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
@@ -66,7 +70,7 @@ export function SiteFooter() {
                         </h3>
 
                         <div className="mt-4 grid gap-2">
-                            {footer.companyLinks.map((link) => (
+                            {companyLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
@@ -111,17 +115,19 @@ export function SiteFooter() {
                         rights reserved.
                     </p>
 
-                    <div className="flex gap-5">
-                        {footer.legalLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="transition hover:text-white"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </div>
+                    {legalLinks.length > 0 ? (
+                        <div className="flex gap-5">
+                            {legalLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="transition hover:text-white"
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </footer>
