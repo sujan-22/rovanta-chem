@@ -34,24 +34,26 @@ export function SiteHeader() {
 
     return (
         <header className="sticky top-0 z-50">
-            <div className="hidden bg-oxide py-2 text-xs text-[#eadfd6] lg:block">
-                <div className="site-container flex items-center justify-between gap-6">
-                    <p>{company.address.short}</p>
+            <div className="hidden border-b border-white/10 bg-ink py-2.5 lg:block">
+                <div className="shell flex items-center justify-between gap-8">
+                    <p className="label text-on-ink-faint">
+                        {company.address.short}
+                    </p>
 
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-7">
                         <a
                             href={`mailto:${company.email}`}
-                            className="inline-flex items-center gap-1.5 transition hover:text-white"
+                            className="label inline-flex items-center gap-2 text-on-ink-soft transition-colors hover:text-copper-bright"
                         >
-                            <Mail className="size-3.5" />
+                            <Mail className="size-3" />
                             {company.email}
                         </a>
 
                         <a
                             href={`tel:${company.phoneHref}`}
-                            className="inline-flex items-center gap-1.5 transition hover:text-white"
+                            className="label inline-flex items-center gap-2 text-on-ink-soft transition-colors hover:text-copper-bright"
                         >
-                            <Phone className="size-3.5" />
+                            <Phone className="size-3" />
                             {company.phoneDisplay}
                         </a>
 
@@ -60,17 +62,16 @@ export function SiteHeader() {
                             target="_blank"
                             rel="noreferrer"
                             aria-label="ROVANTA on LinkedIn"
-                            className="inline-flex items-center gap-1.5 transition hover:text-white"
+                            className="text-on-ink-soft transition-colors hover:text-copper-bright"
                         >
                             <FaLinkedinIn className="size-3.5" />
-                            LinkedIn
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div className="border-b border-line bg-card/95 shadow-[0_1px_3px_rgb(14_37_48/6%)] backdrop-blur-xl">
-                <div className="site-container flex h-20 items-center justify-between gap-6">
+            <div className="border-b border-line bg-paper/90 backdrop-blur-xl">
+                <div className="shell flex h-18 items-center justify-between gap-8 md:h-20">
                     <Link
                         href="/"
                         aria-label={`${company.legalName} home`}
@@ -82,25 +83,17 @@ export function SiteHeader() {
                             width={1536}
                             height={1024}
                             priority
-                            className="h-14 w-auto object-contain md:h-16"
+                            className="h-12 w-auto object-contain md:h-14"
                         />
                     </Link>
 
                     <nav
                         aria-label="Primary"
-                        className="hidden items-center gap-1 lg:flex"
+                        className="hidden items-center gap-9 lg:flex"
                     >
-                        {primaryNavigation.map((item) =>
-                            item.cta ? (
-                                <Button
-                                    key={item.href}
-                                    asChild
-                                    size="sm"
-                                    className="ml-2 bg-copper text-white hover:bg-copper-deep"
-                                >
-                                    <Link href={item.href}>{item.label}</Link>
-                                </Button>
-                            ) : (
+                        {primaryNavigation
+                            .filter((item) => !item.cta)
+                            .map((item) => (
                                 <Link
                                     key={item.href}
                                     href={item.href}
@@ -110,24 +103,41 @@ export function SiteHeader() {
                                             : undefined
                                     }
                                     className={cn(
-                                        "relative rounded-md px-3 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:origin-left after:scale-x-0 after:bg-copper after:transition-transform hover:text-copper-deep hover:after:scale-x-100",
+                                        "relative py-1 text-sm transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-copper after:transition-transform after:duration-300 hover:text-copper hover:after:scale-x-100",
                                         isCurrent(item.href)
-                                            ? "text-copper-deep after:scale-x-100"
-                                            : "text-ink",
+                                            ? "text-copper after:scale-x-100"
+                                            : "text-ink-soft",
                                     )}
                                 >
                                     {item.label}
                                 </Link>
-                            ),
-                        )}
+                            ))}
+
+                        {primaryNavigation
+                            .filter((item) => item.cta)
+                            .map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="group inline-flex items-center gap-2 border-b border-ink pb-1 text-sm text-ink transition-colors hover:border-copper hover:text-copper"
+                                >
+                                    {item.label}
+                                    <span
+                                        aria-hidden="true"
+                                        className="transition-transform duration-300 group-hover:translate-x-1"
+                                    >
+                                        &rarr;
+                                    </span>
+                                </Link>
+                            ))}
                     </nav>
 
                     <Sheet>
                         <SheetTrigger asChild>
                             <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
-                                className="text-ink lg:hidden"
+                                className="rounded-none text-ink hover:bg-paper-2 lg:hidden"
                             >
                                 <Menu className="size-5" />
                                 <span className="sr-only">Open navigation</span>
@@ -135,15 +145,15 @@ export function SiteHeader() {
                         </SheetTrigger>
 
                         {/*
-                          * Fixed logo, scrolling link list, pinned footer. The
-                          * safe-area padding keeps the logo out from under the
-                          * notch and the CTA above the iOS home indicator.
-                          */}
+                         * Fixed logo, scrolling link list, pinned footer. The
+                         * safe-area padding keeps the logo out from under the
+                         * notch and the CTA above the iOS home indicator.
+                         */}
                         <SheetContent
                             side="right"
-                            className="flex w-[88vw] flex-col overflow-hidden border-line bg-card p-0 sm:max-w-sm"
+                            className="flex w-[90vw] flex-col overflow-hidden border-line bg-paper p-0 sm:max-w-md"
                         >
-                            <SheetHeader className="shrink-0 px-7 pt-[max(1.25rem,env(safe-area-inset-top))] pb-3 text-left">
+                            <SheetHeader className="shrink-0 border-b border-line px-6 pt-[max(1.25rem,env(safe-area-inset-top))] pb-4 text-left">
                                 <SheetTitle>
                                     <Link
                                         href="/"
@@ -155,7 +165,7 @@ export function SiteHeader() {
                                             alt={`${company.legalName} logo`}
                                             width={1536}
                                             height={1024}
-                                            className="h-14 w-auto object-contain"
+                                            className="h-12 w-auto object-contain"
                                         />
                                     </Link>
                                 </SheetTitle>
@@ -163,9 +173,9 @@ export function SiteHeader() {
 
                             <nav
                                 aria-label="Mobile"
-                                className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-7 py-2"
+                                className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-6"
                             >
-                                {sheetLinks.map((item) => (
+                                {sheetLinks.map((item, index) => (
                                     <SheetClose key={item.href} asChild>
                                         <Link
                                             href={item.href}
@@ -175,44 +185,50 @@ export function SiteHeader() {
                                                     : undefined
                                             }
                                             className={cn(
-                                                "rounded-lg px-4 py-3 text-lg font-medium transition hover:bg-paper-deep",
+                                                "flex items-baseline gap-4 border-b border-line py-4 font-display text-2xl transition-colors",
                                                 isCurrent(item.href)
-                                                    ? "bg-paper-deep text-copper-deep"
-                                                    : "text-ink",
+                                                    ? "text-copper"
+                                                    : "text-ink hover:text-copper",
                                             )}
                                         >
+                                            <span className="label text-ink-faint">
+                                                {String(index + 1).padStart(
+                                                    2,
+                                                    "0",
+                                                )}
+                                            </span>
                                             {item.label}
                                         </Link>
                                     </SheetClose>
                                 ))}
                             </nav>
 
-                            <div className="shrink-0 border-t border-line px-7 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+                            <div className="shrink-0 border-t border-line px-6 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
                                 {sheetCta ? (
                                     <SheetClose asChild>
                                         <Link
                                             href={sheetCta.href}
-                                            className="block rounded-lg bg-copper px-4 py-3 text-center font-semibold text-white transition hover:bg-copper-deep"
+                                            className="block bg-ink px-5 py-4 text-center text-sm tracking-wide text-on-ink transition-colors hover:bg-ink-lift"
                                         >
                                             {sheetCta.label}
                                         </Link>
                                     </SheetClose>
                                 ) : null}
 
-                                <div className="mt-4 grid gap-3 text-sm text-ink-soft">
+                                <div className="mt-5 grid gap-2.5">
                                     <a
                                         href={`mailto:${company.email}`}
-                                        className="inline-flex items-center gap-2 transition hover:text-ink"
+                                        className="inline-flex items-center gap-2.5 text-sm text-ink-soft transition-colors hover:text-ink"
                                     >
-                                        <Mail className="size-4" />
+                                        <Mail className="size-3.5" />
                                         {company.email}
                                     </a>
 
                                     <a
                                         href={`tel:${company.phoneHref}`}
-                                        className="inline-flex items-center gap-2 transition hover:text-ink"
+                                        className="inline-flex items-center gap-2.5 text-sm text-ink-soft transition-colors hover:text-ink"
                                     >
-                                        <Phone className="size-4" />
+                                        <Phone className="size-3.5" />
                                         {company.phoneDisplay}
                                     </a>
                                 </div>

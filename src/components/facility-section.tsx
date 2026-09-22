@@ -1,19 +1,9 @@
 import Link from "next/link";
-import {
-    Factory,
-    Microscope,
-    Recycle,
-    Settings2,
-    ShieldCheck,
-    Zap,
-} from "lucide-react";
 
+import { MediaFrame } from "@/components/media-frame";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
 import { siteContent } from "@/content/site-content";
-
-const icons = [Settings2, Zap, Recycle, ShieldCheck, Factory, Microscope];
 
 export function FacilitySection() {
     const { manufacturing } = siteContent;
@@ -21,92 +11,101 @@ export function FacilitySection() {
     return (
         <section
             id="manufacturing"
-            className="section-dark scroll-mt-24 py-20 md:py-24"
+            className="ground-ink band scroll-mt-24 overflow-hidden"
         >
-            <div className="site-container">
-                <Reveal>
-                    <SectionHeading
-                        eyebrow={manufacturing.hero.eyebrow}
-                        title={manufacturing.hero.title}
-                        description={manufacturing.hero.description}
-                        theme="dark"
-                    />
-                </Reveal>
+            <div className="shell">
+                <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+                    <Reveal className="lg:col-span-5">
+                        <SectionHeading
+                            eyebrow={manufacturing.hero.eyebrow}
+                            title={manufacturing.hero.title}
+                            description={manufacturing.hero.description}
+                            index="04"
+                            theme="dark"
+                        />
 
-                <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                    {manufacturing.infrastructure.map((item, index) => {
-                        const Icon = icons[index] ?? Factory;
+                        <Link
+                            href="/manufacturing"
+                            className="group mt-10 inline-flex items-center gap-3 border-b border-copper-bright pb-1.5 text-lg text-copper-bright transition-colors hover:border-on-ink hover:text-on-ink"
+                        >
+                            Inside the plant
+                            <span
+                                aria-hidden="true"
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                            >
+                                &rarr;
+                            </span>
+                        </Link>
+                    </Reveal>
 
-                        return (
-                            <Reveal key={item.title} delay={(index % 3) * 0.07}>
-                                <article className="h-full rounded-xl border border-white/15 bg-white/4 p-6">
-                                    <Icon className="size-7 text-copper" />
+                    <Reveal
+                        delay={0.1}
+                        className="lg:col-span-6 lg:col-start-7"
+                    >
+                        <MediaFrame
+                            className="aspect-4/3 w-full"
+                            caption="Reactor hall"
+                            sizes="(min-width: 1024px) 50vw, 100vw"
+                        />
+                    </Reveal>
+                </div>
 
-                                    <h3 className="mt-5 font-heading text-xl font-bold text-white">
+                {/* Production lines, as two large figures. */}
+                <div className="mt-24 grid gap-x-16 gap-y-10 md:grid-cols-2">
+                    {manufacturing.productionLines.map((line, index) => (
+                        <Reveal key={line.number} delay={index * 0.08}>
+                            <article className="h-full border-t border-white/20 pt-8">
+                                <div className="flex items-baseline justify-between gap-6">
+                                    <p className="label text-copper-bright">
+                                        {line.number}
+                                    </p>
+                                    <p className="font-mono text-xs tracking-wide text-on-ink-faint">
+                                        {line.formula}
+                                    </p>
+                                </div>
+
+                                <h3 className="font-display mt-6 text-3xl text-on-ink md:text-4xl">
+                                    {line.title}
+                                </h3>
+
+                                <p className="font-mono mt-3 text-sm text-copper-bright">
+                                    {line.capacity}
+                                </p>
+
+                                <p className="text-pretty mt-6 leading-[1.85] text-on-ink-soft">
+                                    {line.description}
+                                </p>
+                            </article>
+                        </Reveal>
+                    ))}
+                </div>
+
+                {/* Plant infrastructure, compressed to a scannable list. */}
+                <div className="mt-24">
+                    <Reveal>
+                        <p className="label border-t border-white/20 pt-4 text-on-ink-faint">
+                            Plant infrastructure
+                        </p>
+                    </Reveal>
+
+                    <div className="mt-8 grid gap-x-16 md:grid-cols-2 lg:grid-cols-3">
+                        {manufacturing.infrastructure.map((item, index) => (
+                            <Reveal
+                                key={item.title}
+                                delay={Math.min((index % 3) * 0.07, 0.21)}
+                            >
+                                <article className="h-full border-t border-white/12 py-7">
+                                    <h4 className="text-base text-on-ink">
                                         {item.title}
-                                    </h3>
-
-                                    <p className="mt-3 text-sm leading-7 text-[#cbbeb2]">
+                                    </h4>
+                                    <p className="text-pretty mt-3 text-sm leading-relaxed text-on-ink-soft">
                                         {item.description}
                                     </p>
                                 </article>
                             </Reveal>
-                        );
-                    })}
-                </div>
-
-                <Reveal className="mt-12">
-                    <div className="rounded-xl border border-copper/35 bg-copper/10 p-7 md:p-8">
-                        <div className="md:flex md:items-end md:justify-between md:gap-8">
-                            <div>
-                                <p className="technical-label text-copper">
-                                    Production lines
-                                </p>
-
-                                <h3 className="mt-3 max-w-2xl font-heading text-2xl font-bold text-white">
-                                    Two dedicated copper compound lines, one
-                                    quality system.
-                                </h3>
-                            </div>
-
-                            <Button
-                                asChild
-                                className="mt-6 shrink-0 bg-copper text-white hover:bg-copper-deep md:mt-0"
-                            >
-                                <Link href="/manufacturing">
-                                    View Manufacturing
-                                </Link>
-                            </Button>
-                        </div>
-
-                        <div className="mt-7 grid gap-4 sm:grid-cols-2">
-                            {manufacturing.productionLines.map((line) => (
-                                <div
-                                    key={line.number}
-                                    className="rounded-lg border border-white/15 bg-black/15 p-5"
-                                >
-                                    <p className="flex items-center gap-2 text-copper">
-                                        <span className="technical-label">
-                                            {line.number}
-                                        </span>
-                                        <span aria-hidden="true">·</span>
-                                        <span className="font-mono text-xs tracking-[0.05em]">
-                                            {line.formula}
-                                        </span>
-                                    </p>
-
-                                    <h4 className="mt-3 font-heading text-xl font-bold text-white">
-                                        {line.title}
-                                    </h4>
-
-                                    <p className="mt-2 font-mono text-sm text-[#cbbeb2]">
-                                        {line.capacity}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
+                        ))}
                     </div>
-                </Reveal>
+                </div>
             </div>
         </section>
     );

@@ -1,149 +1,99 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
 
+import { MediaFrame } from "@/components/media-frame";
 import { Reveal } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
 import { siteContent } from "@/content/site-content";
-import { cn } from "@/lib/utils";
-
-const plateAccentClasses = [
-    "border-l-copper",
-    "border-l-verdigris",
-    "border-l-sulphate",
-] as const;
 
 export function HeroSection() {
     const { hero } = siteContent.home;
 
     const primaryAction = hero.actions[0];
     const secondaryAction = hero.actions[1];
-    const featuredProducts = siteContent.products.items.slice(0, 3);
 
     return (
-        <section
-            id="home"
-            className="hero-surface relative isolate overflow-hidden"
-        >
-            <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,135,59,0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(46,139,110,0.16),transparent_42%)]"
-            />
+        <section id="home" className="ground-paper pt-16 pb-0 md:pt-24">
+            <div className="shell">
+                <Reveal>
+                    <p className="label text-copper">{hero.eyebrow}</p>
+                </Reveal>
 
-            {/*
-             * Fine engineering grid rather than an oversized formula: it reads as
-             * deliberate texture at every viewport width instead of clipped type.
-             */}
-            <div
-                aria-hidden="true"
-                className="engineering-grid absolute inset-0"
-            />
+                {/*
+                 * The headline runs wide and the supporting copy sits in a
+                 * narrow column beneath its right edge: an editorial split
+                 * rather than a centred block.
+                 */}
+                <Reveal delay={0.05}>
+                    <h1 className="text-balance font-display type-display mt-10 max-w-[15ch] text-ink">
+                        <span className="italic text-copper">
+                            {hero.titlePrefix}
+                        </span>{" "}
+                        {hero.titleSuffix}
+                    </h1>
+                </Reveal>
 
-            <div className="site-container relative z-10 py-20 md:py-24">
-                <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
-                    <Reveal>
-                        <p className="technical-label text-[#9fb0b7]">
-                            {hero.eyebrow}
-                        </p>
-
-                        <h1 className="text-balance mt-6 font-heading text-4xl font-bold leading-[1.08] tracking-tight text-[#f2efe8] md:text-5xl lg:text-6xl">
-                            <span className="text-[#dcb964] italic">
-                                {hero.titlePrefix}
-                            </span>{" "}
-                            {hero.titleSuffix}
-                        </h1>
-
-                        <p className="text-pretty mt-6 max-w-2xl text-base leading-8 text-[#c9d2d6] md:text-lg">
+                <div className="mt-14 grid gap-x-16 gap-y-10 border-t border-ink pt-10 lg:grid-cols-12">
+                    <Reveal delay={0.1} className="lg:col-span-5">
+                        <p className="text-pretty type-lead max-w-[46ch] text-ink-soft">
                             {hero.description}
                         </p>
-
-                        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                            <Button
-                                size="lg"
-                                asChild
-                                className="bg-copper text-white hover:bg-copper-deep"
-                            >
-                                <Link href={primaryAction.href}>
-                                    {primaryAction.label}
-                                    <ArrowRight className="ml-2 size-4" />
-                                </Link>
-                            </Button>
-
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                asChild
-                                className="border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10 hover:text-white"
-                            >
-                                <Link href={secondaryAction.href}>
-                                    {secondaryAction.label}
-                                </Link>
-                            </Button>
-                        </div>
                     </Reveal>
 
-                    <Reveal delay={0.12}>
-                        <div className="rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur-sm md:p-7">
-                            <p className="technical-label text-[#9fb0b7]">
-                                Core product lines
-                            </p>
-
-                            <div className="mt-5 grid gap-1">
-                                {featuredProducts.map((product) => (
-                                    <Link
-                                        key={product.slug}
-                                        href={`/products/${product.slug}`}
-                                        className="group -mx-3 flex items-center justify-between gap-4 rounded-lg px-3 py-3 transition hover:bg-white/8"
-                                    >
-                                        <span>
-                                            <span className="block font-heading text-lg font-bold text-white">
-                                                {product.name}
-                                            </span>
-
-                                            <span className="mt-0.5 block font-mono text-xs text-[#9fb0b7]">
-                                                {product.formula}
-                                                {product.cas
-                                                    ? ` · CAS ${product.cas}`
-                                                    : ""}
-                                            </span>
-                                        </span>
-
-                                        <ArrowUpRight className="size-4 shrink-0 text-copper transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                                    </Link>
-                                ))}
-                            </div>
-
-                            <Link
-                                href="/products"
-                                className="mt-5 inline-flex items-center gap-2 border-t border-white/15 pt-5 text-sm font-semibold text-[#dcb964] transition hover:text-white"
+                    <Reveal
+                        delay={0.15}
+                        className="flex flex-wrap items-start gap-x-10 gap-y-4 lg:col-span-4 lg:col-start-9 lg:justify-end"
+                    >
+                        <Link
+                            href={primaryAction.href}
+                            className="group inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                        >
+                            {primaryAction.label}
+                            <span
+                                aria-hidden="true"
+                                className="transition-transform duration-300 group-hover:translate-x-1"
                             >
-                                View all 8 product lines
-                                <ArrowRight className="size-4" />
-                            </Link>
-                        </div>
+                                &rarr;
+                            </span>
+                        </Link>
+
+                        <Link
+                            href={secondaryAction.href}
+                            className="border-b border-transparent pb-1.5 text-lg text-ink-soft transition-colors hover:border-ink-soft hover:text-ink"
+                        >
+                            {secondaryAction.label}
+                        </Link>
                     </Reveal>
                 </div>
+            </div>
 
-                <div className="mt-16 grid gap-4 border-t border-white/15 pt-10 sm:grid-cols-3">
+            {/*
+             * Full-bleed plant image. Runs edge to edge so the page opens on a
+             * wide horizontal band rather than another boxed element.
+             */}
+            <Reveal delay={0.2} className="mt-16 md:mt-20">
+                <MediaFrame
+                    className="aspect-video w-full md:aspect-21/9"
+                    caption="Laxmi Eco Industrial Park, Surat"
+                    sizes="100vw"
+                    priority
+                />
+            </Reveal>
+
+            {/* Key figures, read as a data strip under the image. */}
+            <div className="shell">
+                <dl className="grid grid-cols-1 sm:grid-cols-3">
                     {hero.plates.map((plate, index) => (
-                        <Reveal key={plate.label} delay={index * 0.08}>
-                            <div
-                                className={cn(
-                                    "h-full rounded-lg border-y border-r border-l-4 border-white/15 bg-white/4 px-5 py-5",
-                                    plateAccentClasses[index] ??
-                                        "border-l-copper",
-                                )}
-                            >
-                                <p className="technical-label text-[#9fb0b7]">
+                        <Reveal key={plate.label} delay={index * 0.07}>
+                            <div className="flex h-full flex-col justify-between gap-6 border-b border-line py-8 sm:border-b-0 sm:py-10 sm:pr-10">
+                                <dt className="label text-ink-faint">
                                     {plate.label}
-                                </p>
-
-                                <p className="mt-2 font-heading text-2xl font-bold text-white">
+                                </dt>
+                                <dd className="font-display text-4xl text-ink md:text-5xl">
                                     {plate.value}
-                                </p>
+                                </dd>
                             </div>
                         </Reveal>
                     ))}
-                </div>
+                </dl>
             </div>
         </section>
     );

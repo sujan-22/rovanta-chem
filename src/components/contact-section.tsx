@@ -1,120 +1,112 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
 
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
 import { siteContent } from "@/content/site-content";
 
 export function ContactSection() {
     const { company, contact } = siteContent;
 
-    const emailContacts = [
-        {
-            title: "General Inquiries",
-            value: company.email,
-            href: `mailto:${company.email}`,
-        },
-        {
-            title: "Sales",
-            value: company.salesEmail,
-            href: `mailto:${company.salesEmail}`,
-        },
-        {
-            title: "Purchasing",
-            value: company.purchaseEmail,
-            href: `mailto:${company.purchaseEmail}`,
-        },
+    const desks = [
+        { title: "General", value: company.email },
+        { title: "Sales", value: company.salesEmail },
+        { title: "Purchasing", value: company.purchaseEmail },
     ];
 
     return (
-        <section id="contact" className="scroll-mt-24 py-20 md:py-24">
-            <div className="site-container">
-                <Reveal>
-                    <SectionHeading
-                        eyebrow={contact.hero.eyebrow}
-                        title={contact.hero.title}
-                        description={contact.hero.description}
-                    />
-                </Reveal>
+        <section id="contact" className="ground-paper band scroll-mt-24">
+            <div className="shell">
+                <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+                    <Reveal className="lg:col-span-5">
+                        <SectionHeading
+                            eyebrow={contact.hero.eyebrow}
+                            title={contact.hero.title}
+                            description={contact.hero.description}
+                            index="07"
+                        />
 
-                <div className="mt-12 grid gap-5 md:grid-cols-3">
-                    {emailContacts.map((item, index) => (
-                        <Reveal key={item.title} delay={index * 0.07}>
-                            <a
-                                href={item.href}
-                                className="surface-card block h-full p-6 transition hover:-translate-y-1 hover:border-copper"
+                        <Link
+                            href="/quote"
+                            className="group mt-10 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                        >
+                            Start an enquiry
+                            <span
+                                aria-hidden="true"
+                                className="transition-transform duration-300 group-hover:translate-x-1"
                             >
-                                <Mail className="size-6 text-copper-deep" />
-
-                                <h3 className="mt-5 font-heading text-lg font-bold text-ink">
-                                    {item.title}
-                                </h3>
-
-                                <p className="mt-2 break-all text-sm text-ink-soft">
-                                    {item.value}
-                                </p>
-                            </a>
-                        </Reveal>
-                    ))}
-                </div>
-
-                <div className="mt-6 grid gap-5 lg:grid-cols-2">
-                    <Reveal>
-                        <div className="surface-card h-full p-6">
-                            <Phone className="size-6 text-verdigris-deep" />
-
-                            <h3 className="mt-5 font-heading text-xl font-bold text-ink">
-                                Phone and WhatsApp
-                            </h3>
-
-                            <a
-                                href={`tel:${company.phoneHref}`}
-                                className="mt-2 block text-ink-soft transition hover:text-ink"
-                            >
-                                {company.phoneDisplay}
-                            </a>
-
-                            <p className="mt-2 text-sm text-ink-soft">
-                                {company.hours}
-                            </p>
-
-                            <Button asChild className="mt-6">
-                                <Link href="/quote">Start an Inquiry</Link>
-                            </Button>
-                        </div>
+                                &rarr;
+                            </span>
+                        </Link>
                     </Reveal>
 
-                    <Reveal delay={0.08}>
-                        <div className="surface-card h-full p-6">
-                            <MapPin className="size-6 text-sulphate" />
+                    <div className="lg:col-span-6 lg:col-start-7">
+                        <Reveal>
+                            <div className="grid gap-x-16 sm:grid-cols-3">
+                                {desks.map((desk) => (
+                                    <div
+                                        key={desk.title}
+                                        className="border-t border-ink pt-4 pb-6"
+                                    >
+                                        <p className="label text-ink-faint">
+                                            {desk.title}
+                                        </p>
+                                        <a
+                                            href={`mailto:${desk.value}`}
+                                            className="mt-3 block break-all text-sm text-ink transition-colors hover:text-copper"
+                                        >
+                                            {desk.value}
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        </Reveal>
 
-                            <h3 className="mt-5 font-heading text-xl font-bold text-ink">
-                                Registered Office and Works
-                            </h3>
+                        <Reveal delay={0.08}>
+                            <div className="mt-8 grid gap-x-16 gap-y-8 sm:grid-cols-2">
+                                <div className="border-t border-line pt-4">
+                                    <p className="label text-ink-faint">
+                                        Phone and WhatsApp
+                                    </p>
+                                    <a
+                                        href={`tel:${company.phoneHref}`}
+                                        className="font-display mt-3 block text-2xl text-ink transition-colors hover:text-copper"
+                                    >
+                                        {company.phoneDisplay}
+                                    </a>
+                                    <p className="mt-2 text-sm text-ink-faint">
+                                        {company.hours}
+                                    </p>
+                                </div>
 
-                            <p className="mt-2 leading-7 text-ink-soft">
-                                {company.address.full}
-                            </p>
+                                <div className="border-t border-line pt-4">
+                                    <p className="label text-ink-faint">
+                                        Registered office and works
+                                    </p>
+                                    <address className="text-pretty mt-3 text-sm not-italic leading-relaxed text-ink-soft">
+                                        {company.address.full}
+                                    </address>
+                                </div>
+                            </div>
+                        </Reveal>
 
-                            <dl className="mt-5 grid gap-3 border-t border-line pt-5">
+                        <Reveal delay={0.12}>
+                            <dl className="mt-10">
                                 {contact.transport.map((item) => (
                                     <div
                                         key={item.label}
-                                        className="grid gap-1 sm:grid-cols-[130px_1fr]"
+                                        className="grid grid-cols-1 gap-1 border-b border-line py-4 sm:grid-cols-[9rem_1fr] sm:gap-8"
                                     >
-                                        <dt className="font-mono text-xs uppercase tracking-wider text-ink-soft">
+                                        <dt className="label pt-1 text-ink-faint">
                                             {item.label}
                                         </dt>
-
-                                        <dd className="text-sm leading-6 text-ink">
+                                        <dd className="text-sm leading-relaxed text-ink">
                                             {item.value}
                                         </dd>
                                     </div>
                                 ))}
                             </dl>
-                        </div>
-                    </Reveal>
+                        </Reveal>
+                    </div>
                 </div>
             </div>
         </section>

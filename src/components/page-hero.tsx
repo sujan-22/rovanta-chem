@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 
 interface PageHeroProps {
     eyebrow: string;
@@ -7,32 +6,35 @@ interface PageHeroProps {
     description: string;
 }
 
+/*
+ * Interior page opener. Deliberately light rather than a dark band: interior
+ * pages are long reads, and the old inverted header made every one of them
+ * start with the same heavy slab.
+ */
 export function PageHero({ eyebrow, title, description }: PageHeroProps) {
     return (
-        <section className="relative overflow-hidden bg-ink py-16 text-[#f2efe8] md:py-20">
-            <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,135,59,0.17),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(46,139,110,0.15),transparent_40%)]"
-            />
-
-            <div className="site-container relative">
-                <div className="mb-5 flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.12em] text-[#9fb0b7]">
-                    <Link href="/" className="hover:text-white">
-                        Home
+        <section className="ground-paper-2 pt-16 pb-16 md:pt-24 md:pb-24">
+            <div className="shell">
+                <nav
+                    aria-label="Breadcrumb"
+                    className="label flex items-center gap-2 text-ink-faint"
+                >
+                    <Link href="/" className="transition-colors hover:text-ink">
+                        Rovanta
                     </Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-copper">{eyebrow}</span>
+                </nav>
 
-                    <ChevronRight className="size-3.5" />
+                <div className="mt-10 grid gap-x-16 gap-y-8 lg:grid-cols-12">
+                    <h1 className="text-balance font-display type-display col-span-full text-ink lg:col-span-7">
+                        {title}
+                    </h1>
 
-                    <span>{eyebrow}</span>
+                    <p className="text-pretty type-lead col-span-full max-w-[52ch] self-end text-ink-soft lg:col-span-5">
+                        {description}
+                    </p>
                 </div>
-
-                <h1 className="text-balance max-w-4xl font-heading text-4xl font-bold leading-tight md:text-5xl">
-                    {title}
-                </h1>
-
-                <p className="mt-5 max-w-3xl text-base leading-8 text-[#c9d2d6] md:text-lg">
-                    {description}
-                </p>
             </div>
         </section>
     );

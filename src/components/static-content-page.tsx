@@ -1,15 +1,17 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
 import { StaticPageContent } from "@/content/site-content";
 
 interface StaticContentPageProps {
     content: StaticPageContent;
 }
 
+/*
+ * Shared template for the narrative pages (R&D, sustainability, careers and
+ * friends). Sections read as an indexed editorial list rather than a card grid.
+ */
 export function StaticContentPage({ content }: StaticContentPageProps) {
     return (
         <main>
@@ -19,71 +21,92 @@ export function StaticContentPage({ content }: StaticContentPageProps) {
                 description={content.description}
             />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container">
-                    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <section className="ground-paper band">
+                <div className="shell">
+                    <div className="border-t border-ink">
                         {content.sections.map((section, index) => (
                             <Reveal
                                 key={section.title}
-                                delay={(index % 3) * 0.07}
+                                delay={Math.min(index * 0.06, 0.24)}
                             >
-                                <article className="surface-card h-full p-6">
-                                    <h2 className="font-heading text-xl font-bold text-ink">
-                                        {section.title}
-                                    </h2>
+                                <article className="grid gap-x-16 gap-y-5 border-b border-line py-10 md:grid-cols-12 md:py-12">
+                                    <div className="flex gap-6 md:col-span-5">
+                                        <span className="label shrink-0 pt-2 text-ink-faint">
+                                            {String(index + 1).padStart(2, "0")}
+                                        </span>
 
-                                    {section.description ? (
-                                        <p className="mt-3 leading-7 text-ink-soft">
-                                            {section.description}
-                                        </p>
-                                    ) : null}
+                                        <h2 className="text-balance font-display type-subtitle text-ink">
+                                            {section.title}
+                                        </h2>
+                                    </div>
 
-                                    {section.items?.length ? (
-                                        <ul className="mt-4 grid gap-3">
-                                            {section.items.map((item) => (
-                                                <li
-                                                    key={item}
-                                                    className="border-l-2 border-verdigris pl-4 text-sm leading-6 text-ink-soft"
-                                                >
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    ) : null}
+                                    <div className="md:col-span-6 md:col-start-7">
+                                        {section.description ? (
+                                            <p className="text-pretty leading-[1.85] text-ink-soft">
+                                                {section.description}
+                                            </p>
+                                        ) : null}
+
+                                        {section.items?.length ? (
+                                            <ul className="mt-6 grid gap-3">
+                                                {section.items.map((item) => (
+                                                    <li
+                                                        key={item}
+                                                        className="text-pretty border-l border-copper pl-5 text-sm leading-relaxed text-ink-soft"
+                                                    >
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : null}
+                                    </div>
                                 </article>
                             </Reveal>
                         ))}
                     </div>
 
                     {content.cta ? (
-                        <Reveal className="mt-12">
-                            <div className="rounded-xl bg-ink p-8 text-[#f2efe8] md:flex md:items-center md:justify-between md:gap-10">
-                                <div>
-                                    <h2 className="font-heading text-2xl font-bold">
+                        <Reveal>
+                            <div className="mt-20 grid gap-x-16 gap-y-8 lg:grid-cols-12">
+                                <div className="lg:col-span-7">
+                                    <h2 className="text-balance font-display type-subtitle max-w-[20ch] text-ink">
                                         {content.cta.title}
                                     </h2>
 
-                                    <p className="mt-3 max-w-3xl leading-7 text-[#c9d2d6]">
+                                    <p className="text-pretty mt-5 max-w-[56ch] leading-relaxed text-ink-soft">
                                         {content.cta.description}
                                     </p>
                                 </div>
 
-                                <Button
-                                    asChild
-                                    className="mt-6 shrink-0 bg-copper text-white hover:bg-copper-deep md:mt-0"
-                                >
+                                <div className="flex items-end lg:col-span-4 lg:col-start-9">
                                     {content.cta.href.startsWith("/") ? (
-                                        <Link href={content.cta.href}>
+                                        <Link
+                                            href={content.cta.href}
+                                            className="group inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                                        >
                                             {content.cta.label}
-                                            <ArrowRight className="ml-2 size-4" />
+                                            <span
+                                                aria-hidden="true"
+                                                className="transition-transform duration-300 group-hover:translate-x-1"
+                                            >
+                                                &rarr;
+                                            </span>
                                         </Link>
                                     ) : (
-                                        <a href={content.cta.href}>
+                                        <a
+                                            href={content.cta.href}
+                                            className="group inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                                        >
                                             {content.cta.label}
-                                            <ArrowRight className="ml-2 size-4" />
+                                            <span
+                                                aria-hidden="true"
+                                                className="transition-transform duration-300 group-hover:translate-x-1"
+                                            >
+                                                &rarr;
+                                            </span>
                                         </a>
                                     )}
-                                </Button>
+                                </div>
                             </div>
                         </Reveal>
                     ) : null}

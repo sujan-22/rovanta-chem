@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -11,30 +11,20 @@ interface RevealProps {
     delay?: number;
 }
 
+/*
+ * Reduced motion is handled globally by `MotionProvider`, not by a hook here:
+ * `useReducedMotion()` resolves differently on the server and the client, so
+ * branching on it made the initial inline styles mismatch during hydration.
+ */
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
-    const prefersReducedMotion = useReducedMotion();
-
     return (
         <motion.div
             className={cn(className)}
-            initial={
-                prefersReducedMotion
-                    ? false
-                    : {
-                          opacity: 0,
-                          y: 18,
-                      }
-            }
-            whileInView={{
-                opacity: 1,
-                y: 0,
-            }}
-            viewport={{
-                once: true,
-                amount: 0.15,
-            }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{
-                duration: 0.55,
+                duration: 0.6,
                 delay,
                 ease: [0.22, 1, 0.36, 1],
             }}

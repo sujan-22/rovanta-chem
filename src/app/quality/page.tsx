@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { Check, FileCheck2 } from "lucide-react";
 
 import { PageHero } from "@/components/page-hero";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/reveal";
 import { siteContent } from "@/content/site-content";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -11,7 +10,7 @@ const { quality } = siteContent;
 export const metadata = createPageMetadata(
     quality.hero.title,
     quality.hero.description,
-    "/quality"
+    "/quality",
 );
 
 export default function QualityPage() {
@@ -19,67 +18,92 @@ export default function QualityPage() {
         <main>
             <PageHero {...quality.hero} />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-                    <div>
-                        <ul className="grid gap-4">
-                            {quality.checkpoints.map((checkpoint) => (
-                                <li
-                                    key={checkpoint}
-                                    className="flex items-start gap-3"
-                                >
-                                    <span className="mt-1 grid size-5 shrink-0 place-items-center rounded bg-verdigris text-white">
-                                        <Check className="size-3.5" />
-                                    </span>
-                                    <span className="leading-7 text-ink-soft">
-                                        {checkpoint}
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
+            <section className="ground-paper band">
+                <div className="shell">
+                    <div className="grid gap-x-16 gap-y-14 lg:grid-cols-12">
+                        <div className="lg:col-span-7">
+                            <Reveal>
+                                <p className="label border-t border-ink pt-4 text-copper">
+                                    In-process controls
+                                </p>
+                            </Reveal>
 
-                        <div className="mt-8 rounded-xl border border-[#e8c79a] bg-[#fff6e8] p-5 text-sm leading-7 text-[#6b4a1e]">
-                            <strong>Certifications:</strong>{" "}
-                            {quality.certificationNote}
+                            <ol className="mt-2">
+                                {quality.checkpoints.map(
+                                    (checkpoint, index) => (
+                                        <Reveal
+                                            key={checkpoint}
+                                            delay={Math.min(index * 0.05, 0.25)}
+                                        >
+                                            <li className="flex gap-6 border-b border-line py-6">
+                                                <span className="label shrink-0 pt-1.5 text-ink-faint">
+                                                    {String(index + 1).padStart(
+                                                        2,
+                                                        "0",
+                                                    )}
+                                                </span>
+                                                <span className="text-pretty text-lg leading-relaxed text-ink">
+                                                    {checkpoint}
+                                                </span>
+                                            </li>
+                                        </Reveal>
+                                    ),
+                                )}
+                            </ol>
+
+                            <Reveal delay={0.1}>
+                                <p className="text-pretty mt-10 border-l-2 border-copper pl-5 leading-relaxed text-ink-soft">
+                                    <span className="text-ink">
+                                        Certifications.
+                                    </span>{" "}
+                                    {quality.certificationNote}
+                                </p>
+                            </Reveal>
                         </div>
-                    </div>
 
-                    <article className="surface-card p-6">
-                        <h2 className="font-heading text-2xl font-bold">
-                            Quality documentation per product
-                        </h2>
+                        <Reveal
+                            delay={0.08}
+                            className="lg:col-span-4 lg:col-start-9"
+                        >
+                            <p className="label border-t border-ink pt-4 text-copper">
+                                Documentation per product
+                            </p>
 
-                        <div className="mt-6 grid gap-3">
-                            {quality.documents.map((document) => (
-                                <div
-                                    key={document.abbreviation}
-                                    className="flex items-center justify-between gap-4 rounded-lg border border-line bg-paper p-4"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <FileCheck2 className="size-5 text-verdigris-deep" />
-                                        <div>
-                                            <p className="font-semibold">
+                            <div className="mt-2">
+                                {quality.documents.map((document) => (
+                                    <div
+                                        key={document.abbreviation}
+                                        className="border-b border-line py-5"
+                                    >
+                                        <div className="flex items-baseline justify-between gap-4">
+                                            <span className="text-ink">
                                                 {document.title}
-                                            </p>
-                                            <p className="text-xs text-ink-soft">
-                                                {document.status}
-                                            </p>
+                                            </span>
+                                            <span className="font-mono shrink-0 text-xs text-copper">
+                                                {document.abbreviation}
+                                            </span>
                                         </div>
+                                        <p className="mt-1.5 text-sm text-ink-faint">
+                                            {document.status}
+                                        </p>
                                     </div>
+                                ))}
+                            </div>
 
-                                    <span className="rounded-full bg-paper-deep px-3 py-1 font-mono text-xs">
-                                        {document.abbreviation}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-
-                        <Button asChild className="mt-6">
-                            <Link href="/quote">
+                            <Link
+                                href="/quote"
+                                className="group mt-10 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                            >
                                 Request documents
+                                <span
+                                    aria-hidden="true"
+                                    className="transition-transform duration-300 group-hover:translate-x-1"
+                                >
+                                    &rarr;
+                                </span>
                             </Link>
-                        </Button>
-                    </article>
+                        </Reveal>
+                    </div>
                 </div>
             </section>
         </main>

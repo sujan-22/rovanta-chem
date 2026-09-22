@@ -1,24 +1,41 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-
 export default function NotFound() {
     return (
-        <main className="grid min-h-[65vh] place-items-center px-6 py-20">
-            <div className="max-w-xl text-center">
-                <p className="technical-label text-copper-deep">404</p>
+        <main className="ground-paper grid min-h-[70vh] place-items-center">
+            <div className="shell">
+                <p className="label text-copper">Error 404</p>
 
-                <h1 className="mt-4 font-heading text-4xl font-bold text-ink">
-                    Page not found
+                <h1 className="text-balance font-display type-title mt-8 max-w-[14ch] text-ink">
+                    This page does not exist.
                 </h1>
 
-                <p className="mt-4 leading-8 text-ink-soft">
-                    The requested page may have moved or may not exist.
+                <p className="text-pretty type-lead mt-6 max-w-[46ch] text-ink-soft">
+                    The page may have moved, or it may be part of the site that
+                    is not published yet.
                 </p>
 
-                <Button asChild className="mt-7">
-                    <Link href="/">Return Home</Link>
-                </Button>
+                <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
+                    <Link
+                        href="/"
+                        className="group inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                    >
+                        Return home
+                        <span
+                            aria-hidden="true"
+                            className="transition-transform duration-300 group-hover:translate-x-1"
+                        >
+                            &rarr;
+                        </span>
+                    </Link>
+
+                    <Link
+                        href="/products"
+                        className="border-b border-transparent pb-1.5 text-lg text-ink-soft transition-colors hover:border-ink-soft hover:text-ink"
+                    >
+                        Browse products
+                    </Link>
+                </div>
             </div>
         </main>
     );

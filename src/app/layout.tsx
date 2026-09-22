@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Libre_Baskerville, Roboto_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Serif, Inter } from "next/font/google";
 
 import "./globals.css";
 
+import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
@@ -15,14 +16,20 @@ const inter = Inter({
     variable: "--font-body",
 });
 
-const libreBaskerville = Libre_Baskerville({
+/*
+ * A single-weight high-contrast display serif. Weight contrast in the design
+ * comes from the sans, so this is never faux-bolded.
+ */
+const instrumentSerif = Instrument_Serif({
     subsets: ["latin"],
-    weight: ["400", "700"],
-    variable: "--font-display",
+    weight: "400",
+    style: ["normal", "italic"],
+    variable: "--font-display-serif",
 });
 
-const robotoMono = Roboto_Mono({
+const plexMono = IBM_Plex_Mono({
     subsets: ["latin"],
+    weight: ["400", "500"],
     variable: "--font-code",
 });
 
@@ -64,17 +71,19 @@ export default function RootLayout({
             lang="en-IN"
             className={cn(
                 inter.variable,
-                libreBaskerville.variable,
-                robotoMono.variable,
+                instrumentSerif.variable,
+                plexMono.variable,
             )}
         >
             <body>
-                <SiteHeader />
+                <MotionProvider>
+                    <SiteHeader />
 
-                {children}
-                <Analytics />
-                <SiteFooter />
-                <WhatsAppFloat />
+                    {children}
+                    <Analytics />
+                    <SiteFooter />
+                    <WhatsAppFloat />
+                </MotionProvider>
             </body>
         </html>
     );

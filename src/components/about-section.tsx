@@ -1,96 +1,110 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
 
+import { MediaFrame } from "@/components/media-frame";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
 import { siteContent } from "@/content/site-content";
 
 export function AboutSection() {
     const { about, company } = siteContent;
 
     return (
-        <section id="about" className="scroll-mt-24 py-20 md:py-24">
-            <div className="site-container">
-                <Reveal>
-                    <SectionHeading
-                        eyebrow={about.hero.eyebrow}
-                        title={about.hero.title}
-                        description={about.hero.description}
-                    />
-                </Reveal>
+        <section id="about" className="ground-paper band scroll-mt-24">
+            <div className="shell">
+                <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+                    <Reveal className="lg:col-span-5">
+                        <SectionHeading
+                            eyebrow={about.hero.eyebrow}
+                            title={about.hero.title}
+                            index="01"
+                        />
+                    </Reveal>
 
-                <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-                    <Reveal>
-                        <div>
-                            <div className="grid gap-5">
+                    <div className="lg:col-span-6 lg:col-start-7">
+                        <Reveal delay={0.08}>
+                            <div className="grid gap-6">
                                 {about.paragraphs.map((paragraph) => (
                                     <p
                                         key={paragraph}
-                                        className="text-base leading-8 text-ink-soft"
+                                        className="text-pretty leading-[1.85] text-ink-soft"
                                     >
                                         {paragraph}
                                     </p>
                                 ))}
                             </div>
+                        </Reveal>
 
-                            <div className="mt-8">
-                                <p className="technical-label text-copper-deep">
-                                    Core Business Areas
+                        <Reveal delay={0.12}>
+                            <div className="mt-12">
+                                <p className="label text-ink-faint">
+                                    Core business areas
                                 </p>
 
-                                <div className="mt-4 flex flex-wrap gap-2">
+                                <ul className="mt-5 grid gap-x-10 gap-y-3 sm:grid-cols-2">
                                     {about.businessAreas.map((area) => (
-                                        <span
+                                        <li
                                             key={area}
-                                            className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-4 py-2 text-sm font-medium text-ink"
+                                            className="border-b border-line pb-3 text-sm text-ink"
                                         >
-                                            <Check className="size-3.5 text-verdigris-deep" />
                                             {area}
-                                        </span>
+                                        </li>
                                     ))}
-                                </div>
+                                </ul>
                             </div>
+                        </Reveal>
 
-                            <Button asChild variant="outline" className="mt-8">
-                                <Link href="/about">
-                                    Learn More About Rovanta
-                                    <ArrowRight className="ml-2 size-4" />
-                                </Link>
-                            </Button>
-                        </div>
+                        <Reveal delay={0.16}>
+                            <Link
+                                href="/about"
+                                className="group mt-12 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-ink transition-colors hover:border-copper hover:text-copper"
+                            >
+                                More about Rovanta
+                                <span
+                                    aria-hidden="true"
+                                    className="transition-transform duration-300 group-hover:translate-x-1"
+                                >
+                                    &rarr;
+                                </span>
+                            </Link>
+                        </Reveal>
+                    </div>
+                </div>
+
+                {/* Company facts, set as a reference table rather than a card. */}
+                <div className="mt-24 grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:mt-32">
+                    <Reveal className="lg:col-span-5">
+                        <MediaFrame
+                            className="aspect-4/5 w-full"
+                            caption="Greenfield plant, under construction"
+                            sizes="(min-width: 1024px) 40vw, 100vw"
+                        />
                     </Reveal>
 
-                    <Reveal delay={0.08}>
-                        <div className="surface-card overflow-hidden">
-                            <div className="border-b border-line bg-paper-deep px-5 py-4">
-                                <p className="technical-label text-copper-deep">
-                                    Company Facts
-                                </p>
+                    <div className="lg:col-span-6 lg:col-start-7">
+                        <Reveal>
+                            <p className="label border-t border-ink pt-4 text-copper">
+                                Rovanta at a glance
+                            </p>
+                        </Reveal>
 
-                                <h3 className="mt-2 font-heading text-2xl font-bold text-ink">
-                                    ROVANTA at a glance
-                                </h3>
-                            </div>
-
-                            <dl>
-                                {company.facts.map((fact) => (
-                                    <div
-                                        key={fact.label}
-                                        className="grid gap-2 border-b border-line px-5 py-4 last:border-b-0 sm:grid-cols-[150px_1fr]"
-                                    >
-                                        <dt className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+                        <dl className="mt-2">
+                            {company.facts.map((fact, index) => (
+                                <Reveal
+                                    key={fact.label}
+                                    delay={Math.min(index * 0.05, 0.25)}
+                                >
+                                    <div className="grid grid-cols-1 gap-1 border-b border-line py-5 sm:grid-cols-[11rem_1fr] sm:gap-8">
+                                        <dt className="label pt-1 text-ink-faint">
                                             {fact.label}
                                         </dt>
-
-                                        <dd className="text-sm leading-6 text-ink">
+                                        <dd className="text-pretty leading-relaxed text-ink">
                                             {fact.value}
                                         </dd>
                                     </div>
-                                ))}
-                            </dl>
-                        </div>
-                    </Reveal>
+                                </Reveal>
+                            ))}
+                        </dl>
+                    </div>
                 </div>
             </div>
         </section>
