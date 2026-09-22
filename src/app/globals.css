@@ -32,12 +32,6 @@
     --color-input: var(--input);
     --color-ring: var(--ring);
 
-    --color-chart-1: var(--chart-1);
-    --color-chart-2: var(--chart-2);
-    --color-chart-3: var(--chart-3);
-    --color-chart-4: var(--chart-4);
-    --color-chart-5: var(--chart-5);
-
     --color-sidebar: var(--sidebar);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar-primary: var(--sidebar-primary);
@@ -48,52 +42,64 @@
     --color-sidebar-ring: var(--sidebar-ring);
 
     /*
-     * Rovanta brand utilities:
-     * bg-ink, text-copper, border-line, etc.
+     * Brand utilities: bg-ink, text-copper, border-line, text-ink-soft, etc.
+     * Deliberately small. The palette is two grounds (paper, ink) plus one
+     * accent (copper); everything else is a tint of those.
      */
     --color-ink: var(--brand-ink);
+    --color-ink-lift: var(--brand-ink-lift);
     --color-ink-soft: var(--brand-ink-soft);
+    --color-ink-faint: var(--brand-ink-faint);
     --color-paper: var(--brand-paper);
-    --color-paper-deep: var(--brand-paper-deep);
+    --color-paper-2: var(--brand-paper-2);
     --color-copper: var(--brand-copper);
-    --color-copper-deep: var(--brand-copper-deep);
-    --color-verdigris: var(--brand-verdigris);
-    --color-verdigris-deep: var(--brand-verdigris-deep);
-    --color-sulphate: var(--brand-sulphate);
-    --color-oxide: var(--brand-oxide);
+    --color-copper-bright: var(--brand-copper-bright);
     --color-line: var(--brand-line);
+    --color-on-ink: var(--brand-on-ink);
+    --color-on-ink-soft: var(--brand-on-ink-soft);
+    --color-on-ink-faint: var(--brand-on-ink-faint);
 
     --font-sans: var(--font-body);
-    --font-heading: var(--font-display);
+    --font-display: var(--font-display-serif);
     --font-mono: var(--font-code);
 
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
+    --radius-xl: 6px;
+    --radius-2xl: 8px;
+    --radius-3xl: 12px;
+    --radius-4xl: 16px;
 }
 
 :root {
     /*
-     * Rovanta brand palette.
+     * Palette. Taken from the logo: a deep teal-black and a brass gold. The
+     * previous design spent four accent colours on decoration; this one spends
+     * one, and leans on type, rule weight and whitespace instead.
      */
-    --brand-ink: #0e2530;
-    --brand-ink-soft: #45555f;
-    --brand-paper: #f6f4ef;
-    --brand-paper-deep: #ece8df;
-    --brand-copper: #a8873b;
-    --brand-copper-deep: #82682a;
-    --brand-verdigris: #2e8b6e;
-    --brand-verdigris-deep: #1f6b53;
-    --brand-sulphate: #2456a6;
-    --brand-oxide: #32241e;
-    --brand-line: #d8d2c6;
+    --brand-ink: #0b1f27;
+    --brand-ink-lift: #123039;
+    --brand-ink-soft: #55656c;
+    /* Darkened from #8b9599, which failed AA at the 11px label size. */
+    --brand-ink-faint: #687377;
+
+    --brand-paper: #faf8f4;
+    --brand-paper-2: #f3efe7;
+
+    /* Passes AA on paper for body-sized text. */
+    --brand-copper: #8a6729;
+    /* For use on the ink ground, where the light accent needs to lift. */
+    --brand-copper-bright: #d7b071;
+
+    --brand-line: #e0d9cb;
+
+    --brand-on-ink: #f4f1e9;
+    --brand-on-ink-soft: #b9c4c8;
+    --brand-on-ink-faint: #7f8f95;
 
     /*
-     * shadcn semantic tokens.
+     * shadcn semantic tokens mapped onto the brand palette.
      */
     --background: var(--brand-paper);
     --foreground: var(--brand-ink);
@@ -101,43 +107,37 @@
     --card: #ffffff;
     --card-foreground: var(--brand-ink);
 
-    --popover: #ffffff;
+    --popover: var(--brand-paper);
     --popover-foreground: var(--brand-ink);
 
-    --primary: var(--brand-copper);
-    --primary-foreground: #ffffff;
+    --primary: var(--brand-ink);
+    --primary-foreground: var(--brand-paper);
 
-    --secondary: var(--brand-paper-deep);
+    --secondary: var(--brand-paper-2);
     --secondary-foreground: var(--brand-ink);
 
-    --muted: var(--brand-paper-deep);
+    --muted: var(--brand-paper-2);
     --muted-foreground: var(--brand-ink-soft);
 
-    --accent: var(--brand-verdigris);
+    --accent: var(--brand-copper);
     --accent-foreground: #ffffff;
 
-    --destructive: #b42318;
+    --destructive: #a5341f;
 
     --border: var(--brand-line);
     --input: var(--brand-line);
-    --ring: var(--brand-sulphate);
+    --ring: var(--brand-copper);
 
-    --chart-1: var(--brand-copper);
-    --chart-2: var(--brand-verdigris);
-    --chart-3: var(--brand-sulphate);
-    --chart-4: var(--brand-copper-deep);
-    --chart-5: var(--brand-verdigris-deep);
-
-    --sidebar: var(--brand-paper-deep);
+    --sidebar: var(--brand-paper-2);
     --sidebar-foreground: var(--brand-ink);
     --sidebar-primary: var(--brand-ink);
-    --sidebar-primary-foreground: #ffffff;
+    --sidebar-primary-foreground: var(--brand-paper);
     --sidebar-accent: #ffffff;
     --sidebar-accent-foreground: var(--brand-ink);
     --sidebar-border: var(--brand-line);
-    --sidebar-ring: var(--brand-sulphate);
+    --sidebar-ring: var(--brand-copper);
 
-    --radius: 0.625rem;
+    --radius: 4px;
 }
 
 @layer base {
@@ -147,22 +147,26 @@
 
     html {
         @apply scroll-smooth font-sans;
+        /* Interior pages scroll to anchors beneath the sticky header. */
+        scroll-padding-top: 6rem;
     }
 
     body {
         @apply bg-background text-foreground antialiased;
-        /* `dvh` tracks the viewport Safari actually shows; `vh` is the fallback. */
         min-height: 100vh;
         min-height: 100dvh;
+        font-synthesis-weight: none;
+        text-rendering: optimizeLegibility;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: var(--font-display), serif;
+    /*
+     * The display serif is a single weight by design. Bold is never synthesised
+     * on it; weight contrast comes from the sans instead.
+     */
+    .font-display {
+        font-family: var(--font-display-serif), Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.015em;
     }
 
     a,
@@ -171,54 +175,98 @@
     }
 
     ::selection {
-        background: color-mix(in oklch, var(--brand-copper) 35%, transparent);
+        background: color-mix(in srgb, var(--brand-copper) 26%, transparent);
         color: var(--brand-ink);
     }
 }
 
 @layer components {
-    .site-container {
-        @apply mx-auto w-full max-w-[1180px] px-6;
-    }
-
-    .brand-strip {
-        height: 5px;
-        background: linear-gradient(
-            to right,
-            var(--brand-copper) 0%,
-            var(--brand-copper) 33.333%,
-            var(--brand-verdigris) 33.333%,
-            var(--brand-verdigris) 66.666%,
-            var(--brand-sulphate) 66.666%,
-            var(--brand-sulphate) 100%
-        );
-    }
-
-    .hero-surface {
-        background: var(--brand-ink);
-        color: var(--brand-paper);
+    /*
+     * One container, one gutter rhythm. Wider than the old 1180px so the
+     * editorial two-column splits have room to breathe.
+     */
+    .shell {
+        @apply mx-auto w-full max-w-[1320px] px-6 md:px-10 lg:px-14;
     }
 
     /*
-     * Fine engineering grid used behind dark hero surfaces. Masked to fade out
-     * at the edges so it never terminates on a hard line.
+     * Section rhythm. `band` is the default vertical measure; the page gets its
+     * pacing from alternating grounds rather than from differing paddings.
      */
-    .engineering-grid {
+    .band {
+        @apply py-20 md:py-28 lg:py-36;
+    }
+
+    .band-tight {
+        @apply py-14 md:py-20;
+    }
+
+    .ground-paper {
+        background: var(--brand-paper);
+    }
+
+    .ground-paper-2 {
+        background: var(--brand-paper-2);
+    }
+
+    .ground-ink {
+        background: var(--brand-ink);
+        color: var(--brand-on-ink);
+    }
+
+    /*
+     * Micro label used for section indices, categories and data keys. Small,
+     * spaced, monospaced: the one piece of "technical" texture in the system.
+     */
+    .label {
+        @apply font-mono text-[0.6875rem] uppercase tracking-[0.2em];
+    }
+
+
+    /*
+     * Image regions. Real photography drops straight in; until then the frame
+     * renders a brand-coloured abstract so nothing reads as a missing asset.
+     */
+    .media-frame {
+        position: relative;
+        overflow: hidden;
+        background: var(--brand-ink);
+    }
+
+    .media-abstract {
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(
+                62% 55% at 76% 16%,
+                color-mix(in srgb, var(--brand-copper-bright) 20%, transparent),
+                transparent 70%
+            ),
+            linear-gradient(
+                158deg,
+                var(--brand-ink-lift) 0%,
+                var(--brand-ink) 64%
+            );
+    }
+
+    /* Fine ruled texture over the abstract, masked so it never ends on a line. */
+    .media-grid {
+        position: absolute;
+        inset: 0;
         background-image:
-            linear-gradient(to right, #f2efe8 1px, transparent 1px),
-            linear-gradient(to bottom, #f2efe8 1px, transparent 1px);
-        background-size: 64px 64px;
-        opacity: 0.07;
-        mask-image: radial-gradient(ellipse at center, black, transparent 78%);
-    }
-
-    .section-alt {
-        background: var(--brand-paper-deep);
-    }
-
-    .section-dark {
-        background: var(--brand-oxide);
-        color: #efe7de;
+            linear-gradient(
+                to right,
+                rgb(244 241 233 / 60%) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                to bottom,
+                rgb(244 241 233 / 60%) 1px,
+                transparent 1px
+            );
+        background-size: 56px 56px;
+        opacity: 0.1;
+        mask-image: linear-gradient(165deg, black 0%, transparent 72%);
     }
 
     /*
@@ -234,29 +282,38 @@
         max-height: 100vh;
         max-height: 100dvh;
     }
-
-    .surface-card {
-        @apply rounded-xl border bg-card text-card-foreground;
-        box-shadow:
-            0 1px 2px rgb(14 37 48 / 6%),
-            0 8px 24px rgb(14 37 48 / 7%);
-    }
-
-    .technical-label {
-        @apply font-mono text-xs uppercase tracking-[0.14em];
-    }
 }
 
 @layer utilities {
-    .font-heading {
-        font-family: var(--font-display), serif;
-    }
-
     .text-balance {
         text-wrap: balance;
     }
 
     .text-pretty {
         text-wrap: pretty;
+    }
+
+    /*
+     * Fluid display sizes. The jump from body copy to display is the point of
+     * the whole design, so the top end is deliberately large.
+     */
+    .type-display {
+        font-size: clamp(2.75rem, 6.6vw, 6rem);
+        line-height: 0.98;
+    }
+
+    .type-title {
+        font-size: clamp(2.125rem, 4.4vw, 3.75rem);
+        line-height: 1.04;
+    }
+
+    .type-subtitle {
+        font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+        line-height: 1.16;
+    }
+
+    .type-lead {
+        font-size: clamp(1.0625rem, 1.15vw, 1.25rem);
+        line-height: 1.75;
     }
 }

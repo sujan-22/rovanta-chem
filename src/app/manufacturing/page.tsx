@@ -1,28 +1,10 @@
-import {
-    Factory,
-    Microscope,
-    Recycle,
-    Settings2,
-    ShieldCheck,
-    Zap,
-} from "lucide-react";
-
+import { MediaFrame } from "@/components/media-frame";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
 import { siteContent } from "@/content/site-content";
 import { createPageMetadata } from "@/lib/metadata";
 
 const { manufacturing } = siteContent;
-
-const infrastructureIcons = [
-    Settings2,
-    Zap,
-    Recycle,
-    ShieldCheck,
-    Factory,
-    Microscope,
-];
 
 export const metadata = createPageMetadata(
     manufacturing.hero.title,
@@ -35,41 +17,44 @@ export default function ManufacturingPage() {
         <main>
             <PageHero {...manufacturing.hero} />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container">
+            <Reveal>
+                <MediaFrame
+                    className="aspect-video w-full md:aspect-21/9"
+                    caption="Plant, Laxmi Eco Industrial Park"
+                    sizes="100vw"
+                />
+            </Reveal>
+
+            <section className="ground-paper band">
+                <div className="shell">
                     <Reveal>
-                        <SectionHeading
-                            eyebrow="Production lines"
-                            title="Two dedicated copper compound lines."
-                            description="Each line runs to a fixed specification with in-process controls at every stage and a certificate of analysis on every lot."
-                        />
+                        <p className="label border-t border-ink pt-4 text-copper">
+                            Production lines
+                        </p>
                     </Reveal>
 
-                    <div className="mt-12 grid gap-6 lg:grid-cols-2">
+                    <div className="mt-10 grid gap-x-16 gap-y-12 md:grid-cols-2">
                         {manufacturing.productionLines.map((line, index) => (
                             <Reveal key={line.number} delay={index * 0.08}>
-                                <article className="surface-card h-full p-7 md:p-8">
-                                    <div className="flex items-start justify-between gap-4">
-                                        <p className="flex items-center gap-2 text-copper-deep">
-                                            <span className="technical-label">
-                                                {line.number}
-                                            </span>
-                                            <span aria-hidden="true">·</span>
-                                            <span className="font-mono text-xs tracking-[0.05em]">
-                                                {line.formula}
-                                            </span>
+                                <article className="h-full">
+                                    <div className="flex items-baseline justify-between gap-6 border-b border-line pb-3">
+                                        <p className="label text-ink-faint">
+                                            {line.number}
                                         </p>
-
-                                        <span className="shrink-0 rounded-full bg-paper-deep px-3 py-1 font-mono text-xs text-ink-soft">
-                                            {line.capacity}
-                                        </span>
+                                        <p className="font-mono text-xs text-copper">
+                                            {line.formula}
+                                        </p>
                                     </div>
 
-                                    <h3 className="mt-4 font-heading text-2xl font-bold text-ink">
+                                    <h2 className="font-display type-subtitle mt-7 text-ink">
                                         {line.title}
-                                    </h3>
+                                    </h2>
 
-                                    <p className="mt-4 leading-8 text-ink-soft">
+                                    <p className="font-mono mt-3 text-sm text-copper">
+                                        {line.capacity}
+                                    </p>
+
+                                    <p className="text-pretty mt-6 leading-[1.85] text-ink-soft">
                                         {line.description}
                                     </p>
                                 </article>
@@ -79,76 +64,75 @@ export default function ManufacturingPage() {
                 </div>
             </section>
 
-            <section className="section-alt py-20 md:py-24">
-                <div className="site-container">
+            <section className="ground-ink band">
+                <div className="shell">
                     <Reveal>
-                        <SectionHeading
-                            eyebrow="Plant infrastructure"
-                            title="Engineered for safety and consistency."
-                            description="A compact plant specified for controlled operation, contained handling and reliable uptime."
-                        />
+                        <div className="grid gap-x-16 gap-y-6 border-t border-white/20 pt-6 lg:grid-cols-12">
+                            <p className="label text-copper-bright lg:col-span-4">
+                                Plant infrastructure
+                            </p>
+
+                            <h2 className="text-balance font-display type-subtitle max-w-[20ch] text-on-ink lg:col-span-8">
+                                Engineered for safety and consistency.
+                            </h2>
+                        </div>
                     </Reveal>
 
-                    <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                        {manufacturing.infrastructure.map((item, index) => {
-                            const Icon = infrastructureIcons[index] ?? Factory;
+                    <div className="mt-14 grid gap-x-16 md:grid-cols-2 lg:grid-cols-3">
+                        {manufacturing.infrastructure.map((item, index) => (
+                            <Reveal
+                                key={item.title}
+                                delay={Math.min((index % 3) * 0.07, 0.21)}
+                            >
+                                <article className="h-full border-t border-white/12 py-8">
+                                    <span className="label text-on-ink-faint">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
 
-                            return (
-                                <Reveal
-                                    key={item.title}
-                                    delay={(index % 3) * 0.07}
-                                >
-                                    <article className="surface-card h-full p-6">
-                                        <span className="grid size-11 place-items-center rounded-lg bg-paper-deep text-copper-deep">
-                                            <Icon className="size-5" />
-                                        </span>
+                                    <h3 className="mt-4 text-lg text-on-ink">
+                                        {item.title}
+                                    </h3>
 
-                                        <h3 className="mt-5 font-heading text-xl font-bold text-ink">
-                                            {item.title}
-                                        </h3>
-
-                                        <p className="mt-3 leading-7 text-ink-soft">
-                                            {item.description}
-                                        </p>
-                                    </article>
-                                </Reveal>
-                            );
-                        })}
+                                    <p className="text-pretty mt-3 text-sm leading-relaxed text-on-ink-soft">
+                                        {item.description}
+                                    </p>
+                                </article>
+                            </Reveal>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            <section className="py-20 md:py-24">
-                <div className="site-container">
+            <section className="ground-paper band">
+                <div className="shell">
                     <Reveal>
-                        <SectionHeading
-                            eyebrow="Logistics"
-                            title="On the NH-8 corridor."
-                            description="Road, rail, sea and air links that keep domestic dispatch and export lead times predictable."
-                        />
+                        <div className="grid gap-x-16 gap-y-6 border-t border-ink pt-6 lg:grid-cols-12">
+                            <p className="label text-copper lg:col-span-4">
+                                Logistics
+                            </p>
+
+                            <h2 className="text-balance font-display type-subtitle max-w-[20ch] text-ink lg:col-span-8">
+                                On the NH-8 corridor.
+                            </h2>
+                        </div>
                     </Reveal>
 
                     <Reveal delay={0.08}>
-                        <div className="surface-card mt-12 overflow-x-auto">
-                            <table className="w-full min-w-[34rem] border-collapse text-left">
-                                <tbody>
-                                    {manufacturing.logistics.map((item) => (
-                                        <tr
-                                            key={item.label}
-                                            className="border-b border-line last:border-b-0"
-                                        >
-                                            <th className="w-40 bg-paper-deep px-5 py-4 align-top font-mono text-xs uppercase tracking-wider text-ink-soft">
-                                                {item.label}
-                                            </th>
-
-                                            <td className="px-5 py-4 leading-7 text-ink">
-                                                {item.value}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                        <dl className="mt-12">
+                            {manufacturing.logistics.map((item) => (
+                                <div
+                                    key={item.label}
+                                    className="grid grid-cols-1 gap-2 border-b border-line py-6 sm:grid-cols-[10rem_1fr] sm:gap-16"
+                                >
+                                    <dt className="label pt-1.5 text-ink-faint">
+                                        {item.label}
+                                    </dt>
+                                    <dd className="text-pretty text-lg leading-relaxed text-ink">
+                                        {item.value}
+                                    </dd>
+                                </div>
+                            ))}
+                        </dl>
                     </Reveal>
                 </div>
             </section>

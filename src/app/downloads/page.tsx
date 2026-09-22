@@ -13,7 +13,7 @@ const { downloads } = siteContent;
 export const metadata = createPageMetadata(
     downloads.hero.title,
     downloads.hero.description,
-    "/downloads"
+    "/downloads",
 );
 
 function DocumentList({
@@ -32,21 +32,19 @@ function DocumentList({
 
     return (
         <section>
-            <h2 className="font-heading text-2xl font-bold">
-                {title}
-            </h2>
+            <h2 className="font-display text-2xl font-bold">{title}</h2>
 
             <div className="mt-5 grid gap-3">
                 {documents.map((document) => (
                     <div
                         key={document.title}
-                        className="surface-card flex items-center justify-between gap-4 p-4"
+                        className="flex items-center justify-between gap-4 p-4"
                     >
                         <span className="flex items-center gap-3 font-semibold">
-                            <Icon className="size-5 text-copper-deep" />
+                            <Icon className="size-5 text-copper" />
                             {document.title}
                         </span>
-                        <span className="rounded-full bg-paper-deep px-3 py-1 font-mono text-xs text-ink-soft">
+                        <span className="rounded-full bg-paper-2 px-3 py-1 font-mono text-xs text-ink-soft">
                             {document.status}
                         </span>
                     </div>
@@ -69,8 +67,8 @@ export default function DownloadsPage() {
         <main>
             <PageHero {...downloads.hero} />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container grid gap-12 lg:grid-cols-2">
+            <section className="ground-paper band">
+                <div className="shell grid gap-12 lg:grid-cols-2">
                     <DocumentList
                         title="Public documents"
                         documents={downloads.publicDocuments}
@@ -83,7 +81,7 @@ export default function DownloadsPage() {
                     />
                 </div>
 
-                <div className="site-container mt-10">
+                <div className="shell mt-10">
                     <Button asChild>
                         <Link href="/customer-portal">
                             Open customer portal

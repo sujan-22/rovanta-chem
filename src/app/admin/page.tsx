@@ -22,8 +22,8 @@ export default function AdminPage() {
                 description={content.hero.description}
             />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container">
+            <section className="ground-paper band">
+                <div className="shell">
                     <div className="rounded-xl border border-[#e8c79a] bg-[#fff6e8] p-5 text-sm leading-7 text-[#6b4a1e]">
                         {content.disclaimer}
                     </div>
@@ -32,9 +32,9 @@ export default function AdminPage() {
                         {content.overviewMetrics.map((metric) => (
                             <article
                                 key={metric.label}
-                                className="surface-card border-l-4 border-l-copper p-6"
+                                className="border-l-4 border-l-copper p-6"
                             >
-                                <p className="font-heading text-4xl font-bold">
+                                <p className="font-display text-4xl font-bold">
                                     {metric.value}
                                 </p>
                                 <p className="mt-2 text-sm text-ink-soft">
@@ -44,8 +44,8 @@ export default function AdminPage() {
                         ))}
                     </div>
 
-                    <div className="surface-card mt-8 p-6">
-                        <h2 className="font-heading text-2xl font-bold">
+                    <div className="mt-8 p-6">
+                        <h2 className="font-display text-2xl font-bold">
                             Planned modules
                         </h2>
 

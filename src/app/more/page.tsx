@@ -1,51 +1,51 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { PageHero } from "@/components/page-hero";
+import { Reveal } from "@/components/reveal";
 import { siteContent, visibleLinks } from "@/content/site-content";
 
 export default function MorePage() {
+    const groups = siteContent.navigationGroups
+        .map((group) => ({ ...group, links: visibleLinks(group.links) }))
+        .filter((group) => group.links.length > 0);
+
     return (
         <main>
             <PageHero
                 eyebrow="Index"
-                title="All pages"
-                description="Complete sitemap of the ROVANTA website."
+                title="Every page on this site."
+                description="A complete index of the Rovanta website, grouped by company, capability and commercial enquiry."
             />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container grid gap-6 md:grid-cols-3">
-                    {siteContent.navigationGroups.map((group) => {
-                        const links = visibleLinks(group.links);
+            <section className="ground-paper band">
+                <div className="shell grid gap-x-16 gap-y-16 md:grid-cols-3">
+                    {groups.map((group, groupIndex) => (
+                        <Reveal key={group.title} delay={groupIndex * 0.08}>
+                            <nav aria-label={group.title}>
+                                <p className="label border-t border-ink pt-4 text-copper">
+                                    {group.title}
+                                </p>
 
-                        if (links.length === 0) {
-                            return null;
-                        }
-
-                        return (
-                        <article
-                            key={group.title}
-                            className="surface-card p-6"
-                        >
-                            <h2 className="font-heading text-2xl font-bold">
-                                {group.title}
-                            </h2>
-
-                            <nav className="mt-5 grid gap-1">
-                                {links.map((link) => (
-                                    <Link
-                                        key={link.href}
-                                        href={link.href}
-                                        className="flex items-center justify-between rounded-lg px-3 py-2.5 font-medium text-ink transition hover:bg-paper-deep"
-                                    >
-                                        {link.label}
-                                        <ArrowRight className="size-4 text-copper-deep" />
-                                    </Link>
-                                ))}
+                                <div className="mt-2">
+                                    {group.links.map((link) => (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            className="group flex items-center justify-between gap-4 border-b border-line py-4 text-ink transition-colors hover:text-copper"
+                                        >
+                                            {link.label}
+                                            <span
+                                                aria-hidden="true"
+                                                className="text-copper transition-transform duration-300 group-hover:translate-x-1"
+                                            >
+                                                &rarr;
+                                            </span>
+                                        </Link>
+                                    ))}
+                                </div>
                             </nav>
-                        </article>
-                        );
-                    })}
+                        </Reveal>
+                    ))}
                 </div>
             </section>
         </main>

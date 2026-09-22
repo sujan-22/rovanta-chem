@@ -4,32 +4,59 @@ interface SectionHeadingProps {
     eyebrow: string;
     title: string;
     description?: string;
+    /** Editorial index, e.g. "01". Printed opposite the eyebrow. */
+    index?: string;
     theme?: "light" | "dark";
-    centered?: boolean;
+    className?: string;
 }
 
+/*
+ * Section opener: an indexed label sitting on a rule, then the display title.
+ * The rule does the work the old card borders used to do.
+ */
 export function SectionHeading({
     eyebrow,
     title,
     description,
+    index,
     theme = "light",
-    centered = false,
+    className,
 }: SectionHeadingProps) {
+    const dark = theme === "dark";
+
     return (
-        <div className={cn("max-w-3xl", centered && "mx-auto text-center")}>
-            <p
+        <div className={className}>
+            <div
                 className={cn(
-                    "technical-label mb-4",
-                    theme === "dark" ? "text-copper" : "text-copper-deep",
+                    "flex items-baseline justify-between gap-6 border-t pt-4",
+                    dark ? "border-white/15" : "border-ink",
                 )}
             >
-                {eyebrow}
-            </p>
+                <p
+                    className={cn(
+                        "label",
+                        dark ? "text-copper-bright" : "text-copper",
+                    )}
+                >
+                    {eyebrow}
+                </p>
+
+                {index ? (
+                    <p
+                        className={cn(
+                            "label",
+                            dark ? "text-on-ink-faint" : "text-ink-faint",
+                        )}
+                    >
+                        {index}
+                    </p>
+                ) : null}
+            </div>
 
             <h2
                 className={cn(
-                    "font-heading text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl",
-                    theme === "dark" ? "text-[#f2efe8]" : "text-ink",
+                    "text-balance font-display type-title mt-8 max-w-[18ch]",
+                    dark ? "text-on-ink" : "text-ink",
                 )}
             >
                 {title}
@@ -38,9 +65,8 @@ export function SectionHeading({
             {description ? (
                 <p
                     className={cn(
-                        "mt-5 max-w-2xl text-base leading-8 md:text-lg",
-                        centered && "mx-auto",
-                        theme === "dark" ? "text-[#cbbeb2]" : "text-ink-soft",
+                        "text-pretty type-lead mt-6 max-w-[52ch]",
+                        dark ? "text-on-ink-soft" : "text-ink-soft",
                     )}
                 >
                     {description}

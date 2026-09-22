@@ -1,75 +1,68 @@
-import {
-    Cpu,
-    Droplets,
-    FlaskConical,
-    Leaf,
-    Palette,
-    Waves,
-} from "lucide-react";
-
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { siteContent } from "@/content/site-content";
-
-const icons = [Leaf, Palette, Waves, FlaskConical, Cpu, Droplets];
 
 export function IndustriesSection() {
     const { industries } = siteContent;
 
     return (
-        <section id="industries" className="scroll-mt-24 py-20 md:py-24">
-            <div className="site-container">
+        <section id="industries" className="ground-paper band scroll-mt-24">
+            <div className="shell">
                 <Reveal>
                     <SectionHeading
                         eyebrow={industries.hero.eyebrow}
                         title={industries.hero.title}
                         description={industries.hero.description}
+                        index="03"
+                        className="max-w-4xl"
                     />
                 </Reveal>
 
-                <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                    {industries.items.map((industry, index) => {
-                        const Icon = icons[index] ?? FlaskConical;
+                {/*
+                 * Two columns of hairline-separated entries. No icons, no
+                 * boxes: the market name carries the weight.
+                 */}
+                <div className="mt-16 grid gap-x-16 md:mt-20 md:grid-cols-2">
+                    {industries.items.map((industry, index) => (
+                        <Reveal
+                            key={industry.title}
+                            delay={Math.min((index % 2) * 0.08, 0.16)}
+                        >
+                            <article className="flex h-full gap-6 border-t border-line py-8">
+                                <span className="label shrink-0 pt-1.5 text-ink-faint">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
 
-                        return (
-                            <Reveal
-                                key={industry.title}
-                                delay={(index % 3) * 0.08}
-                            >
-                                <Card className="surface-card h-full">
-                                    <CardHeader>
-                                        <span className="grid size-11 place-items-center rounded-lg bg-paper-deep text-verdigris-deep">
-                                            <Icon className="size-5" />
-                                        </span>
+                                <div>
+                                    <h3 className="font-display text-2xl text-ink">
+                                        {industry.title}
+                                    </h3>
 
-                                        <CardTitle className="mt-4 text-xl">
-                                            {industry.title}
-                                        </CardTitle>
-                                    </CardHeader>
-
-                                    <CardContent className="leading-7 text-ink-soft">
+                                    <p className="text-pretty mt-3 leading-relaxed text-ink-soft">
                                         {industry.description}
-                                    </CardContent>
-                                </Card>
-                            </Reveal>
-                        );
-                    })}
+                                    </p>
+                                </div>
+                            </article>
+                        </Reveal>
+                    ))}
                 </div>
 
-                <Reveal className="mt-12">
-                    <div className="rounded-xl border border-line bg-paper-deep p-7">
-                        <p className="technical-label text-copper-deep">
+                {/* Export statement, set large as a pull quote. */}
+                <Reveal delay={0.1}>
+                    <div className="mt-20 grid gap-x-16 gap-y-8 border-t border-ink pt-10 lg:grid-cols-12">
+                        <p className="label text-copper lg:col-span-3">
                             {industries.exportReadiness.eyebrow}
                         </p>
 
-                        <h3 className="mt-3 font-heading text-2xl font-bold text-ink">
-                            {industries.exportReadiness.title}
-                        </h3>
+                        <div className="lg:col-span-9">
+                            <h3 className="text-balance font-display type-subtitle max-w-[22ch] text-ink">
+                                {industries.exportReadiness.title}
+                            </h3>
 
-                        <p className="mt-4 max-w-4xl leading-8 text-ink-soft">
-                            {industries.exportReadiness.description}
-                        </p>
+                            <p className="text-pretty mt-6 max-w-[68ch] leading-[1.85] text-ink-soft">
+                                {industries.exportReadiness.description}
+                            </p>
+                        </div>
                     </div>
                 </Reveal>
             </div>

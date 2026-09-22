@@ -1,9 +1,5 @@
-import Link from "next/link";
-import { Check, FlaskConical, Settings2 } from "lucide-react";
-
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
 import { siteContent } from "@/content/site-content";
 
 export function WhyRovantaSection() {
@@ -11,78 +7,63 @@ export function WhyRovantaSection() {
 
     const panels = [
         {
-            icon: Settings2,
             title: "Manufacturing capability",
             body: whyRovanta.manufacturingCapabilities,
         },
         {
-            icon: FlaskConical,
             title: "Quality commitment",
             body: whyRovanta.qualityCommitment,
         },
     ];
 
     return (
-        <section
-            id="why-rovanta"
-            className="section-alt scroll-mt-24 py-20 md:py-24"
-        >
-            <div className="site-container">
-                <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-14">
-                    <Reveal>
-                        <SectionHeading
-                            eyebrow={whyRovanta.eyebrow}
-                            title={whyRovanta.title}
-                            description={whyRovanta.description}
-                        />
+        <section id="why-rovanta" className="ground-paper-2 band scroll-mt-24">
+            <div className="shell">
+                <Reveal>
+                    <SectionHeading
+                        eyebrow={whyRovanta.eyebrow}
+                        title={whyRovanta.title}
+                        description={whyRovanta.description}
+                        index="06"
+                        className="max-w-4xl"
+                    />
+                </Reveal>
 
-                        <ul className="mt-9 grid gap-4">
-                            {whyRovanta.benefits.map((benefit) => (
-                                <li
-                                    key={benefit}
-                                    className="flex items-start gap-3"
-                                >
-                                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded bg-verdigris text-white">
-                                        <Check className="size-3.5" />
+                <div className="mt-16 grid gap-x-16 gap-y-12 md:mt-20 lg:grid-cols-12">
+                    <ul className="lg:col-span-7">
+                        {whyRovanta.benefits.map((benefit, index) => (
+                            <Reveal
+                                key={benefit}
+                                delay={Math.min(index * 0.06, 0.24)}
+                            >
+                                <li className="flex gap-6 border-b border-line py-6">
+                                    <span className="label shrink-0 pt-1.5 text-copper">
+                                        {String(index + 1).padStart(2, "0")}
                                     </span>
-
-                                    <span className="leading-7 text-ink">
+                                    <span className="text-pretty text-lg leading-relaxed text-ink">
                                         {benefit}
                                     </span>
                                 </li>
-                            ))}
-                        </ul>
+                            </Reveal>
+                        ))}
+                    </ul>
 
-                        <Button asChild className="mt-9">
-                            <Link href="/quote">Request a Quote</Link>
-                        </Button>
-                    </Reveal>
-
-                    <div className="grid content-start gap-5">
-                        {panels.map((panel, index) => {
-                            const Icon = panel.icon;
-
-                            return (
-                                <Reveal
-                                    key={panel.title}
-                                    delay={0.08 + index * 0.08}
-                                >
-                                    <article className="surface-card h-full p-6 md:p-7">
-                                        <span className="grid size-11 place-items-center rounded-lg bg-paper-deep text-copper-deep">
-                                            <Icon className="size-5" />
-                                        </span>
-
-                                        <h3 className="mt-5 font-heading text-xl font-bold text-ink">
-                                            {panel.title}
-                                        </h3>
-
-                                        <p className="mt-3 leading-7 text-ink-soft">
-                                            {panel.body}
-                                        </p>
-                                    </article>
-                                </Reveal>
-                            );
-                        })}
+                    <div className="lg:col-span-4 lg:col-start-9">
+                        {panels.map((panel, index) => (
+                            <Reveal
+                                key={panel.title}
+                                delay={0.1 + index * 0.08}
+                            >
+                                <article className="border-t border-ink pt-5 pb-10 last:pb-0">
+                                    <h3 className="label text-copper">
+                                        {panel.title}
+                                    </h3>
+                                    <p className="text-pretty mt-4 text-sm leading-[1.8] text-ink-soft">
+                                        {panel.body}
+                                    </p>
+                                </article>
+                            </Reveal>
+                        ))}
                     </div>
                 </div>
             </div>

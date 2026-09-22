@@ -1,5 +1,6 @@
 import { PageHero } from "@/components/page-hero";
-import { ProductCard } from "@/components/product-card";
+import { ProductRow } from "@/components/product-row";
+import { Reveal } from "@/components/reveal";
 import { siteContent } from "@/content/site-content";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -8,7 +9,7 @@ const { products } = siteContent;
 export const metadata = createPageMetadata(
     products.hero.title,
     products.hero.description,
-    "/products"
+    "/products",
 );
 
 export default function ProductsPage() {
@@ -16,16 +17,26 @@ export default function ProductsPage() {
         <main>
             <PageHero {...products.hero} />
 
-            <section className="section-alt py-20 md:py-24">
-                <div className="site-container">
-                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                        {products.items.map((product) => (
-                            <ProductCard
+            <section className="ground-paper band">
+                <div className="shell">
+                    <div className="border-t border-ink">
+                        {products.items.map((product, index) => (
+                            <Reveal
                                 key={product.slug}
-                                product={product}
-                            />
+                                delay={Math.min(index * 0.05, 0.3)}
+                            >
+                                <ProductRow product={product} index={index} />
+                            </Reveal>
                         ))}
                     </div>
+
+                    <Reveal>
+                        <p className="text-pretty mt-12 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
+                            Grades, particle-size profiles and packaging are
+                            matched to the application. Technical and safety
+                            data sheets are issued on request.
+                        </p>
+                    </Reveal>
                 </div>
             </section>
         </main>

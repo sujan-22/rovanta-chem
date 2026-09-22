@@ -1,7 +1,5 @@
-import { Mail } from "lucide-react";
-
 import { PageHero } from "@/components/page-hero";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/reveal";
 import { siteContent } from "@/content/site-content";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -10,7 +8,7 @@ const { careers, company } = siteContent;
 export const metadata = createPageMetadata(
     careers.hero.title,
     careers.hero.description,
-    "/careers"
+    "/careers",
 );
 
 export default function CareersPage() {
@@ -18,49 +16,70 @@ export default function CareersPage() {
         <main>
             <PageHero {...careers.hero} />
 
-            <section className="py-20 md:py-24">
-                <div className="site-container">
-                    <div className="grid gap-4">
-                        {careers.openings.map((opening) => (
-                            <article
-                                key={opening.title}
-                                className="surface-card flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between"
-                            >
-                                <div>
-                                    <h2 className="font-heading text-xl font-bold">
+            <section className="ground-paper band">
+                <div className="shell">
+                    <Reveal>
+                        <p className="label border-t border-ink pt-4 text-copper">
+                            Open positions
+                        </p>
+                    </Reveal>
+
+                    <div className="mt-2">
+                        {careers.openings.map((opening, index) => (
+                            <Reveal key={opening.title} delay={index * 0.06}>
+                                <a
+                                    href={`mailto:${company.email}?subject=${encodeURIComponent(
+                                        `Career application: ${opening.title}`,
+                                    )}`}
+                                    className="group grid gap-x-10 gap-y-2 border-b border-line py-8 transition-colors hover:bg-paper-2 md:grid-cols-12 md:items-baseline"
+                                >
+                                    <span className="label text-ink-faint md:col-span-1">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
+
+                                    <h2 className="font-display text-2xl text-ink transition-colors group-hover:text-copper md:col-span-5">
                                         {opening.title}
                                     </h2>
-                                    <p className="mt-1 text-sm text-ink-soft">
+
+                                    <p className="text-sm text-ink-soft md:col-span-4">
                                         {opening.department} ·{" "}
                                         {opening.location}
                                     </p>
-                                </div>
 
-                                <Button asChild variant="outline">
-                                    <a
-                                        href={`mailto:${company.email}?subject=${encodeURIComponent(
-                                            `Career application: ${opening.title}`
-                                        )}`}
-                                    >
+                                    <span className="inline-flex items-center gap-2 text-sm text-copper md:col-span-2 md:justify-self-end">
                                         Apply
-                                    </a>
-                                </Button>
-                            </article>
+                                        <span
+                                            aria-hidden="true"
+                                            className="transition-transform duration-300 group-hover:translate-x-1"
+                                        >
+                                            &rarr;
+                                        </span>
+                                    </span>
+                                </a>
+                            </Reveal>
                         ))}
                     </div>
 
-                    <div className="mt-8 rounded-xl border border-[#e8c79a] bg-[#fff6e8] p-5 text-sm leading-7 text-[#6b4a1e]">
-                        {careers.note}
-                    </div>
+                    <Reveal>
+                        <p className="text-pretty mt-10 max-w-[70ch] border-l-2 border-copper pl-5 text-sm leading-relaxed text-ink-soft">
+                            {careers.note}
+                        </p>
+                    </Reveal>
 
-                    <Button asChild className="mt-8">
+                    <Reveal>
                         <a
                             href={`mailto:${company.email}?subject=Career%20interest%20at%20ROVANTA`}
+                            className="group mt-12 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
                         >
-                            <Mail className="mr-2 size-4" />
                             Send your CV
+                            <span
+                                aria-hidden="true"
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                            >
+                                &rarr;
+                            </span>
                         </a>
-                    </Button>
+                    </Reveal>
                 </div>
             </section>
         </main>
