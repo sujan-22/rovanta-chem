@@ -160,13 +160,14 @@
     }
 
     /*
-     * The display serif is a single weight by design. Bold is never synthesised
-     * on it; weight contrast comes from the sans instead.
+     * Display serif. Set light at large sizes, where Newsreader's moderate
+     * contrast keeps the stems solid without turning heavy.
      */
     .font-display {
         font-family: var(--font-display-serif), Georgia, serif;
         font-weight: 400;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.02em;
+        font-optical-sizing: auto;
     }
 
     a,

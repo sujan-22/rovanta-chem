@@ -20,6 +20,8 @@ export interface ProductSpecification {
 export interface ProductContent {
     slug: string;
     name: string;
+    /** Product photograph in /public. Absent products fall back to the abstract frame. */
+    image?: string;
     formula: string;
     cas: string | null;
     category: string;
@@ -355,6 +357,7 @@ export const siteContent = {
         people: [
             {
                 name: "Mr. Chintan Rokad",
+                photo: "/Chintan_Rokad.png",
                 role: "Founder & Director · Operations, Innovation & Finance",
                 linkedin:
                     "https://www.linkedin.com/in/chintan-rokad-40864a2a5/",
@@ -369,6 +372,7 @@ export const siteContent = {
             },
             {
                 name: "Mr. Biraj Rokad",
+                photo: "/Biraj_Rokad.jpg",
                 role: "Director · Marketing & Business Development",
                 linkedin: null,
                 description:
@@ -388,11 +392,12 @@ export const siteContent = {
             eyebrow: "Products",
             title: "Product portfolio",
             description:
-                "Eight product and manufacturing lines spanning copper compounds, agrochemical and pharmaceutical intermediates, specialty chemicals, and contract manufacturing.",
+                "Seven product and manufacturing lines spanning copper compounds, agrochemical and pharmaceutical intermediates, specialty chemicals, and contract manufacturing.",
         },
         items: [
             {
                 slug: "copper-oxychloride",
+                image: "/copper_oxychloride.png",
                 name: "Copper Oxychloride",
                 formula: "Cu₂(OH)₃Cl",
                 cas: "1332-40-7",
@@ -441,6 +446,7 @@ export const siteContent = {
             },
             {
                 slug: "copper-oxide",
+                image: "/copper_oxide.png",
                 name: "Copper Oxide (CuO)",
                 formula: "CuO",
                 cas: "1317-38-0",
@@ -489,6 +495,7 @@ export const siteContent = {
             },
             {
                 slug: "copper-sulphate",
+                image: "/copper_sulphate.png",
                 name: "Copper Sulphate",
                 formula: "CuSO₄·5H₂O",
                 cas: "7758-99-8",
@@ -632,45 +639,6 @@ export const siteContent = {
                     {
                         label: "Traceability",
                         value: "Full batch records and COA",
-                    },
-                ] satisfies ProductSpecification[],
-            },
-            {
-                slug: "copper-compounds",
-                name: "Copper Compounds",
-                formula: "Cu-series",
-                cas: null,
-                category: "Copper Portfolio",
-                accent: "copper",
-                shortDescription:
-                    "The full ROVANTA copper chemistry range: oxychloride, oxide, sulphate and derivatives.",
-                capacity: "180 MT/annum aggregate (oxychloride + oxide)",
-                overview:
-                    "Copper chemistry is the core of ROVANTA. Our plant converts secondary copper scrap and wire into standardized, high-purity copper salts, a value-add model that also supports import substitution for technical-grade copper chemicals in India.",
-                applications: [
-                    "Agriculture: fungicides and micronutrients",
-                    "Ceramics and pigments",
-                    "Marine coatings",
-                    "Catalysts and industrial chemistry",
-                ],
-                packaging: "Product-specific.",
-                storage: "Product-specific. Refer to the individual SDS.",
-                specifications: [
-                    {
-                        label: "Copper Oxychloride",
-                        value: "100 MT/annum",
-                    },
-                    {
-                        label: "Copper Oxide",
-                        value: "80 MT/annum",
-                    },
-                    {
-                        label: "Feedstock",
-                        value: "Secondary copper scrap / wire",
-                    },
-                    {
-                        label: "Water policy",
-                        value: "100% Zero Liquid Discharge",
                     },
                 ] satisfies ProductSpecification[],
             },
@@ -1099,7 +1067,7 @@ export const siteContent = {
         },
         requestTypes: ["Quotation", "Sample", "Quotation + Sample"],
         workflow: [
-            "Enquiry lands in the quote-management dashboard and is assigned to sales",
+            "Enquiry reaches the sales desk directly and is acknowledged within one business day",
             "Technical review against product specifications; TDS and SDS shared",
             "Quotation with pricing, packing, lead time and logistics terms",
             "Sample dispatch where requested; COA accompanies every commercial lot",

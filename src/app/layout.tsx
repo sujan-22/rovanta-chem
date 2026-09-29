@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Newsreader } from "next/font/google";
 
 import "./globals.css";
 
@@ -17,12 +17,12 @@ const inter = Inter({
 });
 
 /*
- * A single-weight high-contrast display serif. Weight contrast in the design
- * comes from the sans, so this is never faux-bolded.
+ * Editorial serif with moderate stroke contrast and a real weight range, so
+ * display type reads as sturdy rather than delicate at large sizes.
  */
-const instrumentSerif = Instrument_Serif({
+const newsreader = Newsreader({
     subsets: ["latin"],
-    weight: "400",
+    weight: ["300", "400", "500"],
     style: ["normal", "italic"],
     variable: "--font-display-serif",
 });
@@ -71,7 +71,7 @@ export default function RootLayout({
             lang="en-IN"
             className={cn(
                 inter.variable,
-                instrumentSerif.variable,
+                newsreader.variable,
                 plexMono.variable,
             )}
         >

@@ -238,9 +238,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         <aside className="lg:col-span-4 lg:col-start-9">
                             <div className="lg:sticky lg:top-28">
                                 <MediaFrame
+                                    src={product.image}
+                                    alt={`${product.name} produced by ${siteConfig.name}`}
                                     className="aspect-square w-full"
-                                    caption={product.name}
+                                    caption={product.image ? undefined : product.name}
                                     sizes="(min-width: 1024px) 33vw, 100vw"
+                                    priority
                                 />
 
                                 <div className="mt-10">

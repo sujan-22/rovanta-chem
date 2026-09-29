@@ -1,15 +1,20 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteContent } from "@/content/site-content";
+import { ENQUIRY_FIELDS } from "@/lib/enquiry";
 
 /* Underline fields rather than boxes, to match the rules used across the site. */
 const fieldClass =
     "h-11 rounded-none border-0 border-b border-line bg-transparent px-0 text-base text-ink shadow-none transition-colors focus-visible:border-ink focus-visible:ring-0 md:text-sm";
+
+const selectClass = `${fieldClass} appearance-none bg-[length:1rem] bg-[right_center] bg-no-repeat pr-6`;
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 interface QuoteFormProps {
     defaultProduct?: string;
@@ -20,48 +25,101 @@ export function QuoteForm({
     defaultProduct = "",
     defaultRequestType = "Quotation",
 }: QuoteFormProps) {
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const [status, setStatus] = useState<Status>("idle");
+    const [error, setError] = useState<string | null>(null);
+
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const formData = new FormData(event.currentTarget);
+        const form = event.currentTarget;
+        const formData = new FormData(form);
 
-        const fields = {
-            name: String(formData.get("name") ?? ""),
-            company: String(formData.get("company") ?? ""),
-            email: String(formData.get("email") ?? ""),
-            phone: String(formData.get("phone") ?? ""),
-            product: String(formData.get("product") ?? ""),
-            quantity: String(formData.get("quantity") ?? ""),
-            requestType: String(formData.get("requestType") ?? ""),
-            destination: String(formData.get("destination") ?? ""),
-            message: String(formData.get("message") ?? ""),
-        };
+        const payload = Object.fromEntries(
+            [...ENQUIRY_FIELDS, "website"].map((field) => [
+                field,
+                String(formData.get(field) ?? ""),
+            ]),
+        );
 
-        const subject = `${fields.requestType}: ${
-            fields.product || "General chemical requirement"
-        }`;
+        setStatus("sending");
+        setError(null);
 
-        const body = [
-            `Full name: ${fields.name}`,
-            `Company: ${fields.company}`,
-            `Email: ${fields.email}`,
-            `Phone / WhatsApp: ${fields.phone}`,
-            `Product: ${fields.product}`,
-            `Quantity: ${fields.quantity}`,
-            `Request type: ${fields.requestType}`,
-            `Destination: ${fields.destination}`,
-            "",
-            "Requirement:",
-            fields.message,
-        ].join("\n");
+        try {
+            const response = await fetch("/api/enquiry", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
 
-        window.location.href = `mailto:${
-            siteContent.company.salesEmail
-        }?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            if (!response.ok) {
+                const data = await response.json().catch(() => null);
+
+                throw new Error(
+                    data?.error ??
+                        "We could not send that. Please try again shortly.",
+                );
+            }
+
+            form.reset();
+            setStatus("sent");
+        } catch (caught) {
+            setStatus("error");
+            setError(
+                caught instanceof Error
+                    ? caught.message
+                    : "We could not send that. Please try again shortly.",
+            );
+        }
     }
+
+    if (status === "sent") {
+        return (
+            <div className="border-t border-ink pt-10">
+                <p className="label text-copper">Enquiry received</p>
+
+                <h2 className="font-display type-subtitle mt-6 max-w-[20ch] text-ink">
+                    Thank you. We have your enquiry.
+                </h2>
+
+                <p className="text-pretty type-lead mt-5 max-w-[48ch] text-ink-soft">
+                    Our sales desk replies with pricing, documentation and lead
+                    times, usually within one business day. For anything urgent,
+                    call {siteContent.company.phoneDisplay}.
+                </p>
+
+                <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    className="group mt-9 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-lg text-ink transition-colors hover:border-copper hover:text-copper"
+                >
+                    Send another enquiry
+                    <span
+                        aria-hidden="true"
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                        &rarr;
+                    </span>
+                </button>
+            </div>
+        );
+    }
+
+    const sending = status === "sending";
 
     return (
         <form onSubmit={handleSubmit} className="grid gap-8">
+            {/* Honeypot: hidden from people, irresistible to bots. */}
+            <div aria-hidden="true" className="absolute left-[-9999px]">
+                <label htmlFor="website">Website</label>
+                <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                />
+            </div>
+
             <div className="grid gap-5 md:grid-cols-2">
                 <div className="grid gap-2">
                     <Label className="label text-ink-faint" htmlFor="name">
@@ -129,7 +187,7 @@ export function QuoteForm({
                         name="product"
                         defaultValue={defaultProduct}
                         required
-                        className={fieldClass}
+                        className={selectClass}
                     >
                         <option value="">Select a product</option>
                         {siteContent.products.items.map((product) => (
@@ -166,7 +224,7 @@ export function QuoteForm({
                         id="requestType"
                         name="requestType"
                         defaultValue={defaultRequestType}
-                        className={fieldClass}
+                        className={selectClass}
                     >
                         {siteContent.quote.requestTypes.map((requestType) => (
                             <option key={requestType} value={requestType}>
@@ -206,18 +264,41 @@ export function QuoteForm({
                 />
             </div>
 
-            <button
-                type="submit"
-                className="group mt-2 inline-flex items-center justify-between gap-3 bg-ink px-6 py-4 text-on-ink transition-colors hover:bg-ink-lift"
-            >
-                Prepare email enquiry
-                <span
-                    aria-hidden="true"
-                    className="transition-transform duration-300 group-hover:translate-x-1"
+            {error ? (
+                <p
+                    role="alert"
+                    className="text-pretty border-l-2 border-destructive pl-5 text-sm leading-relaxed text-ink"
                 >
-                    &rarr;
-                </span>
-            </button>
+                    {error} You can also email{" "}
+                    <a
+                        href={`mailto:${siteContent.company.salesEmail}`}
+                        className="text-copper underline underline-offset-4"
+                    >
+                        {siteContent.company.salesEmail}
+                    </a>
+                    .
+                </p>
+            ) : null}
+
+            <div className="flex flex-wrap items-center gap-6">
+                <button
+                    type="submit"
+                    disabled={sending}
+                    className="group inline-flex min-w-60 items-center justify-between gap-4 bg-ink px-7 py-4 text-on-ink transition-colors hover:bg-ink-lift disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                    {sending ? "Sending…" : "Send enquiry"}
+                    <span
+                        aria-hidden="true"
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                        &rarr;
+                    </span>
+                </button>
+
+                <p className="text-sm text-ink-faint">
+                    Goes straight to our sales desk.
+                </p>
+            </div>
         </form>
     );
 }

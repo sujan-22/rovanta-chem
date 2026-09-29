@@ -74,8 +74,9 @@ export function AboutSection() {
                 <div className="mt-24 grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:mt-32">
                     <Reveal className="lg:col-span-5">
                         <MediaFrame
+                            src="/copper_sulphate.png"
+                            alt="Copper sulphate crystals manufactured by Rovanta"
                             className="aspect-4/5 w-full"
-                            caption="Greenfield plant, under construction"
                             sizes="(min-width: 1024px) 40vw, 100vw"
                         />
                     </Reveal>

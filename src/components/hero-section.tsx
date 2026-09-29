@@ -71,8 +71,9 @@ export function HeroSection() {
              */}
             <Reveal delay={0.2} className="mt-16 md:mt-20">
                 <MediaFrame
+                    src="/copper_oxychloride.png"
+                    alt="Technical-grade copper oxychloride powder manufactured by Rovanta"
                     className="aspect-video w-full md:aspect-21/9"
-                    caption="Laxmi Eco Industrial Park, Surat"
                     sizes="100vw"
                     priority
                 />

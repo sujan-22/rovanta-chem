@@ -26,6 +26,8 @@ export default function LeadershipPage() {
                             <article className="grid gap-x-16 gap-y-8 border-t border-ink pt-10 pb-16 last:pb-0 md:grid-cols-12 md:pt-12 md:pb-20">
                                 <div className="md:col-span-3">
                                     <MediaFrame
+                                        src={person.photo}
+                                        alt={`${person.name}, ${person.role}`}
                                         className="aspect-4/5 w-full max-w-[16rem]"
                                         sizes="(min-width: 768px) 25vw, 60vw"
                                     />
