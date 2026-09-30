@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedinIn } from "react-icons/fa";
 
+import { FooterLattice } from "@/components/footer-lattice";
 import { siteContent, visibleLinks } from "@/content/site-content";
 
 export function SiteFooter() {
@@ -159,19 +160,7 @@ export function SiteFooter() {
                 </div>
             </div>
 
-            {/*
-             * Oversized wordmark closing the page, set very low in contrast and
-             * cropped by the footer's bottom edge so it reads as texture rather
-             * than another line of content.
-             */}
-            <div
-                aria-hidden="true"
-                className="relative select-none overflow-hidden border-t border-white/10"
-            >
-                <p className="font-display translate-y-[14%] pt-10 text-center text-[19vw] leading-[0.78] tracking-[-0.04em] whitespace-nowrap text-white/[0.055]">
-                    ROVANTA
-                </p>
-            </div>
+            <FooterLattice />
         </footer>
     );
 }

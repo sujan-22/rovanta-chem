@@ -271,6 +271,35 @@
     }
 
     /*
+     * Copper charge travelling the footer lattice. The dash is short relative
+     * to the path, so what reads is a pulse moving along the bonds rather than
+     * a line being drawn. Static for anyone who asks for less motion.
+     */
+    /*
+     * Without motion the conductors are drawn as static copper traces, so the
+     * artwork keeps its accent rather than losing an element entirely.
+     */
+    .lattice-conductors > g {
+        opacity: 0.4;
+    }
+
+    /*
+     * dash-offset is animated on the wrapping <g> and inherited, so the halo
+     * and core strokes stay in step. Setting it on the path directly would
+     * beat inheritance and freeze the pulse.
+     */
+    @media (prefers-reduced-motion: no-preference) {
+        .lattice-conductors path {
+            stroke-dasharray: 64 1400;
+        }
+
+        .lattice-conductors > g {
+            opacity: 0;
+            animation: lattice-charge 7.6s linear infinite;
+        }
+    }
+
+    /*
      * iOS Safari sizes the containing block for fixed elements to the *large*
      * viewport (the one with the browser chrome hidden), so a `height: 100%`
      * side sheet runs underneath the URL bar and the bottom tab bar. `dvh`
@@ -316,5 +345,22 @@
     .type-lead {
         font-size: clamp(1.0625rem, 1.15vw, 1.25rem);
         line-height: 1.75;
+    }
+}
+
+@keyframes lattice-charge {
+    0% {
+        stroke-dashoffset: 64;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    78% {
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: -780;
+        opacity: 0;
     }
 }
