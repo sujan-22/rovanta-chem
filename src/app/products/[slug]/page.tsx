@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MediaFrame } from "@/components/media-frame";
+import { ProductShot } from "@/components/product-shot";
 import { PageHero } from "@/components/page-hero";
 import { ProductRow } from "@/components/product-row";
 import { Reveal } from "@/components/reveal";
@@ -237,14 +238,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                         <aside className="lg:col-span-4 lg:col-start-9">
                             <div className="lg:sticky lg:top-28">
-                                <MediaFrame
-                                    src={product.image}
-                                    alt={`${product.name} produced by ${siteConfig.name}`}
-                                    className="aspect-square w-full"
-                                    caption={product.image ? undefined : product.name}
-                                    sizes="(min-width: 1024px) 33vw, 100vw"
-                                    priority
-                                />
+                                {product.image ? (
+                                    <ProductShot
+                                        src={product.image}
+                                        alt={`${product.name} produced by ${siteConfig.name}`}
+                                        className="aspect-4/3 w-full"
+                                        sizes="(min-width: 1024px) 33vw, 100vw"
+                                        priority
+                                    />
+                                ) : (
+                                    <MediaFrame
+                                        className="aspect-square w-full"
+                                        caption={product.name}
+                                        sizes="(min-width: 1024px) 33vw, 100vw"
+                                    />
+                                )}
 
                                 <div className="mt-10">
                                     <p className="label border-t border-ink pt-4 text-copper">
@@ -317,6 +325,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                                 key={related.slug}
                                 product={related}
                                 index={index}
+                                ground="bg-paper-2"
                             />
                         ))}
                     </div>

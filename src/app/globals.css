@@ -305,6 +305,20 @@
     }
 
     /*
+     * Product shots are studio photographs on a near-white sweep. `multiply`
+     * drops that sweep into whichever light ground is behind, so the dish sits
+     * on the page instead of inside a white box, and the small brightness lift
+     * pushes the off-white backgrounds (one is 246, not 255) to true white so
+     * none of them leaves a faint grey rectangle.
+     *
+     * Only valid over a light ground; on the ink ground use a framed image.
+     */
+    .product-shot {
+        mix-blend-mode: multiply;
+        filter: brightness(1.06);
+    }
+
+    /*
      * iOS Safari sizes the containing block for fixed elements to the *large*
      * viewport (the one with the browser chrome hidden), so a `height: 100%`
      * side sheet runs underneath the URL bar and the bottom tab bar. `dvh`

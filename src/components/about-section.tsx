@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { MediaFrame } from "@/components/media-frame";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { siteContent } from "@/content/site-content";
@@ -71,17 +70,17 @@ export function AboutSection() {
                 </div>
 
                 {/* Company facts, set as a reference table rather than a card. */}
-                <div className="mt-24 grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:mt-32">
-                    <Reveal className="lg:col-span-5">
-                        <MediaFrame
-                            src="/copper_sulphate.png"
-                            alt="Copper sulphate crystals manufactured by Rovanta"
-                            className="aspect-4/5 w-full"
-                            sizes="(min-width: 1024px) 40vw, 100vw"
-                        />
-                    </Reveal>
+                <div className="mt-24 grid gap-x-16 gap-y-12 lg:mt-32 lg:grid-cols-12">
+                    <div className="lg:col-span-4">
+                        <Reveal>
+                            <p className="text-pretty type-lead max-w-[34ch] text-ink-soft">
+                                The registered particulars of the company and
+                                its Surat site.
+                            </p>
+                        </Reveal>
+                    </div>
 
-                    <div className="lg:col-span-6 lg:col-start-7">
+                    <div className="lg:col-span-7 lg:col-start-6">
                         <Reveal>
                             <p className="label border-t border-ink pt-4 text-copper">
                                 Rovanta at a glance

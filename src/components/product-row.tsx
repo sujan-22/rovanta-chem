@@ -1,5 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
+
+import { ProductShot } from "@/components/product-shot";
 
 import type { ProductContent } from "@/content/site-content";
 import { cn } from "@/lib/utils";
@@ -8,6 +9,8 @@ interface ProductRowProps {
     product: ProductContent;
     index: number;
     theme?: "light" | "dark";
+    /** Background class of the section, for the product shot blend. */
+    ground?: string;
 }
 
 /*
@@ -20,6 +23,7 @@ export function ProductRow({
     product,
     index,
     theme = "light",
+    ground = "bg-paper",
 }: ProductRowProps) {
     const dark = theme === "dark";
 
@@ -45,20 +49,13 @@ export function ProductRow({
 
                 <div className="md:col-span-2">
                     {product.image ? (
-                        <span
-                            className={cn(
-                                "block size-20 overflow-hidden md:size-24",
-                                dark ? "bg-white/5" : "bg-paper-2",
-                            )}
-                        >
-                            <Image
-                                src={product.image}
-                                alt=""
-                                width={200}
-                                height={200}
-                                className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </span>
+                        <ProductShot
+                            src={product.image}
+                            alt=""
+                            ground={ground}
+                            className="aspect-4/3 w-28 transition-transform duration-500 group-hover:scale-105 md:w-full"
+                            sizes="(min-width: 768px) 16vw, 30vw"
+                        />
                     ) : null}
                 </div>
 

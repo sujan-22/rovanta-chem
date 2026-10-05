@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { MediaFrame } from "@/components/media-frame";
+import { ProductShot } from "@/components/product-shot";
 import { Reveal } from "@/components/reveal";
 import { siteContent } from "@/content/site-content";
 
@@ -22,14 +22,36 @@ export function HeroSection() {
                  * narrow column beneath its right edge: an editorial split
                  * rather than a centred block.
                  */}
-                <Reveal delay={0.05}>
-                    <h1 className="text-balance font-display type-display mt-10 max-w-[15ch] text-ink">
-                        <span className="italic text-copper">
-                            {hero.titlePrefix}
-                        </span>{" "}
-                        {hero.titleSuffix}
-                    </h1>
-                </Reveal>
+                <div className="mt-10 grid items-center gap-x-12 gap-y-10 lg:grid-cols-12">
+                    <Reveal delay={0.05} className="lg:col-span-7">
+                        <h1 className="text-balance font-display type-display max-w-[15ch] text-ink">
+                            <span className="italic text-copper">
+                                {hero.titlePrefix}
+                            </span>{" "}
+                            {hero.titleSuffix}
+                        </h1>
+                    </Reveal>
+
+                    <Reveal delay={0.12} className="lg:col-span-5">
+                        <figure>
+                            <ProductShot
+                                src="/copper_oxychloride.png"
+                                alt="Technical-grade copper oxychloride powder manufactured by Rovanta"
+                                className="aspect-4/3 w-full"
+                                sizes="(min-width: 1024px) 40vw, 90vw"
+                                priority
+                            />
+
+                            <figcaption className="mt-2 flex items-center justify-center gap-2 text-ink-faint">
+                                <span className="label">Copper Oxychloride</span>
+                                <span aria-hidden="true">&middot;</span>
+                                <span className="font-mono text-xs tracking-[0.05em]">
+                                    Cu<sub>2</sub>(OH)<sub>3</sub>Cl
+                                </span>
+                            </figcaption>
+                        </figure>
+                    </Reveal>
+                </div>
 
                 <div className="mt-14 grid gap-x-16 gap-y-10 border-t border-ink pt-10 lg:grid-cols-12">
                     <Reveal delay={0.1} className="lg:col-span-5">
@@ -65,21 +87,7 @@ export function HeroSection() {
                 </div>
             </div>
 
-            {/*
-             * Full-bleed plant image. Runs edge to edge so the page opens on a
-             * wide horizontal band rather than another boxed element.
-             */}
-            <Reveal delay={0.2} className="mt-16 md:mt-20">
-                <MediaFrame
-                    src="/copper_oxychloride.png"
-                    alt="Technical-grade copper oxychloride powder manufactured by Rovanta"
-                    className="aspect-video w-full md:aspect-21/9"
-                    sizes="100vw"
-                    priority
-                />
-            </Reveal>
-
-            {/* Key figures, read as a data strip under the image. */}
+            {/* Key figures, read as a data strip closing the hero. */}
             <div className="shell">
                 <dl className="grid grid-cols-1 sm:grid-cols-3">
                     {hero.plates.map((plate, index) => (

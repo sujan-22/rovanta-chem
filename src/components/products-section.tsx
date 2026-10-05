@@ -37,7 +37,11 @@ export function ProductsSection() {
                             key={product.slug}
                             delay={Math.min(index * 0.06, 0.24)}
                         >
-                            <ProductRow product={product} index={index} />
+                            <ProductRow
+                                product={product}
+                                index={index}
+                                ground="bg-paper-2"
+                            />
                         </Reveal>
                     ))}
                 </div>
