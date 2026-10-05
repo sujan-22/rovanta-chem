@@ -271,31 +271,36 @@
     }
 
     /*
-     * Copper charge travelling the footer lattice. The dash is short relative
-     * to the path, so what reads is a pulse moving along the bonds rather than
-     * a line being drawn. Static for anyone who asks for less motion.
+     * Slow metallic glint across the footer logo. The mask is the logo artwork
+     * itself, so the highlight follows the mark rather than sweeping a
+     * rectangle of empty space around it.
      */
-    /*
-     * Without motion the conductors are drawn as static copper traces, so the
-     * artwork keeps its accent rather than losing an element entirely.
-     */
-    .lattice-conductors > g {
-        opacity: 0.4;
+    .logo-sheen {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        background: linear-gradient(
+            104deg,
+            transparent 47%,
+            rgb(255 255 255 / 38%) 50%,
+            transparent 53%
+        );
+        background-size: 320% 100%;
+        background-position: 120% 0;
+        -webkit-mask-image: url("/final-logo-light.png");
+        mask-image: url("/final-logo-light.png");
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
     }
 
-    /*
-     * dash-offset is animated on the wrapping <g> and inherited, so the halo
-     * and core strokes stay in step. Setting it on the path directly would
-     * beat inheritance and freeze the pulse.
-     */
     @media (prefers-reduced-motion: no-preference) {
-        .lattice-conductors path {
-            stroke-dasharray: 64 1400;
-        }
-
-        .lattice-conductors > g {
-            opacity: 0;
-            animation: lattice-charge 7.6s linear infinite;
+        .logo-sheen {
+            animation: logo-sheen 9s ease-in-out infinite;
         }
     }
 
@@ -348,19 +353,22 @@
     }
 }
 
-@keyframes lattice-charge {
-    0% {
-        stroke-dashoffset: 64;
+
+@keyframes logo-sheen {
+    0%,
+    62% {
+        background-position: 120% 0;
         opacity: 0;
     }
-    10% {
+    68% {
         opacity: 1;
     }
-    78% {
+    92% {
+        background-position: -40% 0;
         opacity: 1;
     }
     100% {
-        stroke-dashoffset: -780;
+        background-position: -40% 0;
         opacity: 0;
     }
 }

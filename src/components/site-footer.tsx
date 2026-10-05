@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedinIn } from "react-icons/fa";
 
-import { FooterLattice } from "@/components/footer-lattice";
 import { siteContent, visibleLinks } from "@/content/site-content";
 
 export function SiteFooter() {
@@ -68,15 +67,22 @@ export function SiteFooter() {
                         <Link
                             href="/"
                             aria-label={`${company.legalName} home`}
-                            className="inline-flex"
+                            className="group relative inline-flex"
                         >
                             <Image
                                 src="/final-logo-light.png"
                                 alt={`${company.legalName} logo`}
                                 width={1536}
                                 height={1024}
-                                className="h-16 w-auto object-contain"
+                                className="h-32 w-auto object-contain md:h-40 lg:h-44"
                             />
+
+                            {/*
+                             * Metallic glint, masked to the logo artwork so it
+                             * only crosses the mark itself rather than its
+                             * transparent bounding box.
+                             */}
+                            <span aria-hidden="true" className="logo-sheen" />
                         </Link>
 
                         <address className="mt-8 max-w-[38ch] text-sm not-italic leading-relaxed text-on-ink-soft">
@@ -159,8 +165,6 @@ export function SiteFooter() {
                     ) : null}
                 </div>
             </div>
-
-            <FooterLattice />
         </footer>
     );
 }
