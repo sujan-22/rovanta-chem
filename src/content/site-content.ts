@@ -328,7 +328,7 @@ export const siteContent = {
     about: {
         hero: {
             eyebrow: "Company",
-            title: "About ROVANTA PVT. LTD.",
+            title: "About ROVANTA",
             description:
                 "A specialty chemical manufacturer committed to quality, consistency and environmentally responsible operations.",
         },
@@ -1065,7 +1065,12 @@ export const siteContent = {
             description:
                 "Tell us the product, grade, quantity and destination. Our team responds with pricing, documentation and lead times.",
         },
-        requestTypes: ["Quotation", "Sample", "Quotation + Sample"],
+        requestTypes: [
+            "Quotation",
+            "Sample",
+            "Quotation + Sample",
+            "General Inquiry",
+        ],
         workflow: [
             "Enquiry reaches the sales desk directly and is acknowledged within one business day",
             "Technical review against product specifications; TDS and SDS shared",

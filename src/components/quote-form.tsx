@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteContent } from "@/content/site-content";
-import { ENQUIRY_FIELDS } from "@/lib/enquiry";
+import { ENQUIRY_FIELDS, GENERAL_INQUIRY } from "@/lib/enquiry";
 
 /* Underline fields rather than boxes, to match the rules used across the site. */
 const fieldClass =
@@ -27,6 +27,11 @@ export function QuoteForm({
 }: QuoteFormProps) {
     const [status, setStatus] = useState<Status>("idle");
     const [error, setError] = useState<string | null>(null);
+    const [requestType, setRequestType] = useState(defaultRequestType);
+
+    // A general inquiry is not about a particular product, so it does not ask
+    // for one or for a tonnage. The API applies the same rule.
+    const needsProduct = requestType !== GENERAL_INQUIRY;
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -61,6 +66,7 @@ export function QuoteForm({
             }
 
             form.reset();
+            setRequestType(defaultRequestType);
             setStatus("sent");
         } catch (caught) {
             setStatus("error");
@@ -180,16 +186,20 @@ export function QuoteForm({
             <div className="grid gap-5 md:grid-cols-2">
                 <div className="grid gap-2">
                     <Label className="label text-ink-faint" htmlFor="product">
-                        Product *
+                        Product {needsProduct ? "*" : ""}
                     </Label>
                     <select
                         id="product"
                         name="product"
                         defaultValue={defaultProduct}
-                        required
+                        required={needsProduct}
                         className={selectClass}
                     >
-                        <option value="">Select a product</option>
+                        <option value="">
+                            {needsProduct
+                                ? "Select a product"
+                                : "Select a product (optional)"}
+                        </option>
                         {siteContent.products.items.map((product) => (
                             <option key={product.slug} value={product.name}>
                                 {product.name}
@@ -200,14 +210,14 @@ export function QuoteForm({
 
                 <div className="grid gap-2">
                     <Label className="label text-ink-faint" htmlFor="quantity">
-                        Quantity (MT / kg) *
+                        Quantity (MT / kg) {needsProduct ? "*" : ""}
                     </Label>
                     <Input
                         className={fieldClass}
                         id="quantity"
                         name="quantity"
                         placeholder="Example: 5 MT"
-                        required
+                        required={needsProduct}
                     />
                 </div>
             </div>
@@ -223,7 +233,8 @@ export function QuoteForm({
                     <select
                         id="requestType"
                         name="requestType"
-                        defaultValue={defaultRequestType}
+                        value={requestType}
+                        onChange={(event) => setRequestType(event.target.value)}
                         className={selectClass}
                     >
                         {siteContent.quote.requestTypes.map((requestType) => (

@@ -28,13 +28,23 @@ export const ENQUIRY_FIELDS = [
     "message",
 ] as const satisfies readonly (keyof EnquiryPayload)[];
 
-const REQUIRED_FIELDS = [
+/**
+ * Request type that is not about a specific product, so it does not ask for
+ * one or for a tonnage. Shared with the form so both agree on the rule.
+ */
+export const GENERAL_INQUIRY = "General Inquiry";
+
+const ALWAYS_REQUIRED = [
     "name",
     "company",
     "email",
+    "message",
+] as const satisfies readonly (keyof EnquiryPayload)[];
+
+/** Only meaningful when the enquiry is about a particular product. */
+const PRODUCT_REQUIRED = [
     "product",
     "quantity",
-    "message",
 ] as const satisfies readonly (keyof EnquiryPayload)[];
 
 const MAX_LENGTHS: Partial<Record<keyof EnquiryPayload, number>> = {
@@ -84,7 +94,12 @@ export function parseEnquiry(
         data[field] = trimmed;
     }
 
-    for (const field of REQUIRED_FIELDS) {
+    const required =
+        data.requestType === GENERAL_INQUIRY
+            ? ALWAYS_REQUIRED
+            : [...ALWAYS_REQUIRED, ...PRODUCT_REQUIRED];
+
+    for (const field of required) {
         if (!data[field]) {
             errors.push(`${field} is required.`);
         }
